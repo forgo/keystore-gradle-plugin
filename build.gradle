@@ -21,23 +21,6 @@ gradlePlugin {
     }
 }
 
-//repositories {
-//    mavenCentral()
-//}
-//
-//dependencies {
-//    compile gradleApi()
-//    testCompile group: 'junit', name: 'junit', version: '4.12'
-//}
-
-//uploadArchives {
-//    repositories {
-//        mavenDeployer {
-//            repository(url: mavenLocal().url)
-//        }
-//    }
-//}
-
 pluginBundle {
     website = 'https://github.com/forgo/keystore-gradle-plugin'
     vcsUrl = 'https://github.com/forgo/keystore-gradle-plugin'
