@@ -12,6 +12,18 @@ apply plugin: 'maven'
 
 sourceCompatibility = 1.8
 
+ext {
+    junitVersion = '4.12'
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: "${project.junitVersion}"
+}
+
 gradlePlugin {
     plugins {
         keystorePlugin {

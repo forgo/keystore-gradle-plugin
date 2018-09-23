@@ -48,7 +48,7 @@ public class KeystorePlugin implements Plugin<Project> {
     }
 
     private void addKeystoreTask(Project project) {
-        KeystoreTask task = project.getTasks().create("keystore", KeystoreTask.class);
+        KeystoreTask task = project.getTasks().create("jks", KeystoreTask.class);
         KeystoreExtension keystoreExtension = getKeystoreExtension(project);
         // assign configs brought in from build.gradle
         task.keyFile = keystoreExtension.keyFile;

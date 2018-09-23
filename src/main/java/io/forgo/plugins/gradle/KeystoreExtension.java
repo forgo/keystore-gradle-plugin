@@ -9,14 +9,4 @@ public class KeystoreExtension {
     String keystoreFile;
     String keystorePassword;
     String keystoreAlias;
-
-//    keyFile = "debug.key"
-//    keyPassword = "password"
-//    certFile = "debug.crt"
-//    pkcs12File = "debug.pkcs12"
-//    pkcs12Password = "password"
-//    keystoreFile = "keystore"
-//    keystorePassword = "password"
-//    keystoreFile = "keystore.jks"
-//    keystoreAlias = "jetty"
 }

@@ -32,6 +32,6 @@ public class KeystorePluginTest {
     public void keystorePluginAddsKeystoreTaskToProject() {
         Project project = ProjectBuilder.builder().build();
         project.getPluginManager().apply("io.forgo.keystoreplugin");
-        assertTrue(project.getTasks().getByName("keystore") instanceof KeystoreTask);
+        assertTrue(project.getTasks().getByName("jks") instanceof KeystoreTask);
     }
 }
