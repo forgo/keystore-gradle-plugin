@@ -1,7 +1,6 @@
 package io.forgo.plugins.gradle;
 
 import org.gradle.api.DefaultTask;
-import org.gradle.api.tasks.Input;
 import org.gradle.api.tasks.TaskAction;
 
 import java.io.File;
@@ -20,22 +19,11 @@ public class KeystoreTask extends DefaultTask {
         return "Keystore Gradle Plugin";
     }
 
-    @Input
     private String keyFile;
-
-    @Input
     private String certFile;
-
-    @Input
     private String pkcs12File;
-
-    @Input
     private String pkcs12Password;
-
-    @Input
     private String keystoreFile;
-
-    @Input
     private String keystorePassword;
 
     @TaskAction
@@ -75,48 +63,24 @@ public class KeystoreTask extends DefaultTask {
         }
     }
 
-    public String getKeyFile() {
-        return keyFile;
-    }
-
     public void setKeyFile(String keyFile) {
         this.keyFile = keyFile;
-    }
-
-    public String getCertFile() {
-        return certFile;
     }
 
     public void setCertFile(String certFile) {
         this.certFile = certFile;
     }
 
-    public String getPkcs12File() {
-        return pkcs12File;
-    }
-
     public void setPkcs12File(String pkcs12File) {
         this.pkcs12File = pkcs12File;
-    }
-
-    public String getPkcs12Password() {
-        return pkcs12Password;
     }
 
     public void setPkcs12Password(String pkcs12Password) {
         this.pkcs12Password = pkcs12Password;
     }
 
-    public String getKeystoreFile() {
-        return keystoreFile;
-    }
-
     public void setKeystoreFile(String keystoreFile) {
         this.keystoreFile = keystoreFile;
-    }
-
-    public String getKeystorePassword() {
-        return keystorePassword;
     }
 
     public void setKeystorePassword(String keystorePassword) {

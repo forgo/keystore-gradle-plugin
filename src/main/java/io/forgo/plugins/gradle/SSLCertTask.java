@@ -1,7 +1,6 @@
 package io.forgo.plugins.gradle;
 
 import org.gradle.api.DefaultTask;
-import org.gradle.api.tasks.Input;
 import org.gradle.api.tasks.TaskAction;
 
 import java.io.File;
@@ -20,13 +19,8 @@ public class SSLCertTask extends DefaultTask {
         return "Keystore Gradle Plugin";
     }
 
-    @Input
     private String keyFile;
-
-    @Input
     private String keyPassword;
-
-    @Input
     private String certFile;
 
     @TaskAction
@@ -53,24 +47,12 @@ public class SSLCertTask extends DefaultTask {
         });
     }
 
-    public String getKeyFile() {
-        return keyFile;
-    }
-
     public void setKeyFile(String keyFile) {
         this.keyFile = keyFile;
     }
 
-    public String getKeyPassword() {
-        return keyPassword;
-    }
-
     public void setKeyPassword(String keyPassword) {
         this.keyPassword = keyPassword;
-    }
-
-    public String getCertFile() {
-        return certFile;
     }
 
     public void setCertFile(String certFile) {
