@@ -9,18 +9,29 @@ public class KeystoreExtension {
     private static final String DEFAULT_CERT_FILE = "debug.crt";
     private static final String DEFAULT_PKCS12_FILE = "debug.pkcs12";
     private static final String DEFAULT_PKCS12_PASSWORD = "password";
-    private static final String DEFAULT_KEYSTORE_FILE = "debug.jks";
-    private static final String DEFAULT_KEYSTORE_PASSWORD = "password";
-    private static final String DEFAULT_KEYSTORE_ALIAS = "my_alias";
+    private static final String DEFAULT_JKS_FILE = "debug.jks";
+    private static final String DEFAULT_JKS_PASSWORD = "password";
+    private static final String DEFAULT_ALIAS = "debug";
 
-    String keyFile;
-    String keyPassword;
-    String certFile;
-    String pkcs12File;
-    String pkcs12Password;
-    String keystoreFile;
-    String keystorePassword;
-    String keystoreAlias;
+    private String keyFile;
+    private String keyPassword;
+    private String certFile;
+    private String pkcs12File;
+    private String pkcs12Password;
+    private String jksFile;
+    private String jksPassword;
+    private String alias;
+
+    public KeystoreExtension(String keyFile, String keyPassword, String certFile, String pkcs12File, String pkcs12Password, String jksFile, String jksPassword, String alias) {
+        this.keyFile = keyFile;
+        this.keyPassword = keyPassword;
+        this.certFile = certFile;
+        this.pkcs12File = pkcs12File;
+        this.pkcs12Password = pkcs12Password;
+        this.jksFile = jksFile;
+        this.jksPassword = jksPassword;
+        this.alias = alias;
+    }
 
     public String getKeyFile() {
         return this.keyFile == null
@@ -52,69 +63,69 @@ public class KeystoreExtension {
                 : this.pkcs12Password;
     }
 
-    public String getKeystoreFile() {
-        return this.keystoreFile == null
-                ? DEFAULT_KEYSTORE_FILE
-                : this.keystoreFile;
+    public String getJksFile() {
+        return this.jksFile == null
+                ? DEFAULT_JKS_FILE
+                : this.jksFile;
     }
 
-    public String getKeystorePassword() {
-        return this.keystorePassword == null
-                ? DEFAULT_KEYSTORE_PASSWORD
-                : this.keystorePassword;
+    public String getJksPassword() {
+        return this.jksPassword == null
+                ? DEFAULT_JKS_PASSWORD
+                : this.jksPassword;
     }
 
-    public String getKeystoreAlias() {
-        return this.keystoreAlias == null
-                ? DEFAULT_KEYSTORE_ALIAS
-                : this.keystoreAlias;
+    public String getAlias() {
+        return this.alias == null
+                ? DEFAULT_ALIAS
+                : this.alias;
     }
 
-    public void setKeyFile(final String keyFile) {
-        this.keyFile = keyFile == null
-                ? DEFAULT_KEY_FILE
-                : keyFile;
-    }
-
-    public void setKeyPassword(final String keyPassword) {
-        this.keyPassword = keyPassword == null
-                ? DEFAULT_KEY_PASSWORD
-                : keyPassword;
-    }
-
-    public void setCertFile(final String certFile) {
-        this.certFile = certFile == null
-                ? DEFAULT_CERT_FILE
-                : certFile;
-    }
-
-    public void setPkcs12File(final String pkcs12File) {
-        this.pkcs12File = pkcs12File == null
-                ? DEFAULT_PKCS12_FILE
-                : pkcs12File;
-    }
-
-    public void setPkcs12Password(final String pkcs12Password) {
-        this.pkcs12Password = pkcs12Password == null
-                ? DEFAULT_PKCS12_PASSWORD
-                : pkcs12Password;
-    }
-
-    public void setKeystoreFile(final String keystoreFile) {
-        this.keystoreFile = keystoreFile == null
-                ? DEFAULT_KEYSTORE_FILE
-                : keystoreFile;
-    }
-
-    public void setKeystorePassword(final String keystorePassword) {
-        this.keystorePassword = keystorePassword == null
-                ? DEFAULT_KEYSTORE_PASSWORD
-                : keystorePassword;
-    }
-
-    public void setKeystoreAlias(final String keystoreAlias) {
-        this.keystoreAlias = keystoreAlias == null
-                ? DEFAULT_KEYSTORE_ALIAS
-                : keystoreAlias;
-    }
+//    public void setKeyFile(final String keyFile) {
+//        this.keyFile = keyFile == null
+//                ? DEFAULT_KEY_FILE
+//                : keyFile;
+//    }
+//
+//    public void setKeyPassword(final String keyPassword) {
+//        this.keyPassword = keyPassword == null
+//                ? DEFAULT_KEY_PASSWORD
+//                : keyPassword;
+//    }
+//
+//    public void setCertFile(final String certFile) {
+//        this.certFile = certFile == null
+//                ? DEFAULT_CERT_FILE
+//                : certFile;
+//    }
+//
+//    public void setPkcs12File(final String pkcs12File) {
+//        this.pkcs12File = pkcs12File == null
+//                ? DEFAULT_PKCS12_FILE
+//                : pkcs12File;
+//    }
+//
+//    public void setPkcs12Password(final String pkcs12Password) {
+//        this.pkcs12Password = pkcs12Password == null
+//                ? DEFAULT_PKCS12_PASSWORD
+//                : pkcs12Password;
+//    }
+//
+//    public void setJksFile(final String jksFile) {
+//        this.jksFile = jksFile == null
+//                ? DEFAULT_JKS_FILE
+//                : jksFile;
+//    }
+//
+//    public void setJksPassword(final String jksPassword) {
+//        this.jksPassword = jksPassword == null
+//                ? DEFAULT_JKS_PASSWORD
+//                : jksPassword;
+//    }
+//
+//    public void setAlias(final String alias) {
+//        this.alias = alias == null
+//                ? DEFAULT_ALIAS
+//                : alias;
+//    }
 }

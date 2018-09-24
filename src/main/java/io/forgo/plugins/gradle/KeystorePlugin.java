@@ -52,7 +52,7 @@ public class KeystorePlugin implements Plugin<Project> {
                 task.setCertFile(extension.getCertFile());
                 task.setPkcs12File(extension.getPkcs12File());
                 task.setPkcs12Password(extension.getPkcs12Password());
-                task.setKeystoreAlias(extension.getKeystoreAlias());
+                task.setKeystoreAlias(extension.getAlias());
             });
             task.dependsOn(project.getTasks().getByName(TASK_SSL_CERT));
         });
@@ -67,8 +67,8 @@ public class KeystorePlugin implements Plugin<Project> {
                 task.setCertFile(extension.getCertFile());
                 task.setPkcs12File(extension.getPkcs12File());
                 task.setPkcs12Password(extension.getPkcs12Password());
-                task.setKeystoreFile(extension.getKeystoreFile());
-                task.setKeystorePassword(extension.getKeystorePassword());
+                task.setKeystoreFile(extension.getJksFile());
+                task.setKeystorePassword(extension.getJksPassword());
             });
             task.dependsOn(project.getTasks().getByName(TASK_PKCS12));
         });

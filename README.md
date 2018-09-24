@@ -3,6 +3,26 @@ Plugin to simplify creation of JKS keystores via a key, cert, and an intermediat
 
 [Gradle Plugin Instructions](https://plugins.gradle.org/plugin/io.forgo.keystoreplugin)
 
+## build.gradle usage
+```
+keystore {
+    // sslKey task defaults
+    keyFile = "debug.key"
+    keyPassword = "password"
+    
+    // sslCert task defaults (depends on: sslKey)
+    certFile = "debug.crt"
+    
+    // pkcs12 task defaults (depends on: sslCert)
+    pkcs12File = "debug.pkcs12"
+    pkcs12Password = "password"
+    
+    // jks task defaults (depends on: pkcs12)
+    jksFile = "debug.jks"
+    jksPassword = "password"
+    alias = "debug"
+}
+```
 
 ## How to verify keystore information
 ```
