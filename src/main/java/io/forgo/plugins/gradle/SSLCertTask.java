@@ -4,6 +4,7 @@ import org.gradle.api.DefaultTask;
 import org.gradle.api.tasks.Input;
 import org.gradle.api.tasks.TaskAction;
 
+import java.io.File;
 import java.util.Arrays;
 import java.util.List;
 
@@ -30,6 +31,10 @@ public class SSLCertTask extends DefaultTask {
 
     @TaskAction
     void generateCert() {
+        File fileCertFile = getProject().file(certFile);
+        if(fileCertFile.exists()) {
+            fileCertFile.delete();
+        }
         getProject().file(certFile).delete();
         getProject().exec(execSpec -> {
             execSpec.setIgnoreExitValue(true);

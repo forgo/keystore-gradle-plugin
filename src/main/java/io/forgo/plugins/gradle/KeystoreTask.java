@@ -4,6 +4,7 @@ import org.gradle.api.DefaultTask;
 import org.gradle.api.tasks.Input;
 import org.gradle.api.tasks.TaskAction;
 
+import java.io.File;
 import java.util.Arrays;
 import java.util.List;
 
@@ -39,7 +40,10 @@ public class KeystoreTask extends DefaultTask {
 
     @TaskAction
     void generateJKS() {
-        getProject().file(keystoreFile).delete();
+        File fileKeystoreFile = getProject().file(keystoreFile);
+        if(fileKeystoreFile.exists()) {
+            fileKeystoreFile.delete();
+        }
         getProject().exec(execSpec -> {
             execSpec.setIgnoreExitValue(true);
             execSpec.workingDir(".");
@@ -55,9 +59,20 @@ public class KeystoreTask extends DefaultTask {
             execSpec.setArgs(args);
         });
 
-        getProject().file(keyFile).delete();
-        getProject().file(certFile).delete();
-        getProject().file(pkcs12File).delete();
+        File fileKeyFile = getProject().file(keyFile);
+        if(fileKeyFile.exists()) {
+            fileKeyFile.delete();
+        }
+
+        File fileCertFile = getProject().file(certFile);
+        if(fileCertFile.exists()) {
+            fileCertFile.delete();
+        }
+
+        File filePkcs12File = getProject().file(pkcs12File);
+        if(filePkcs12File.exists()) {
+            filePkcs12File.delete();
+        }
     }
 
     public String getKeyFile() {

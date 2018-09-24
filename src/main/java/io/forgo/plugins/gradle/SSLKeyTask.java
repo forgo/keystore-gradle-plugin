@@ -4,6 +4,7 @@ import org.gradle.api.DefaultTask;
 import org.gradle.api.tasks.Input;
 import org.gradle.api.tasks.TaskAction;
 
+import java.io.File;
 import java.util.Arrays;
 import java.util.List;
 
@@ -27,7 +28,10 @@ public class SSLKeyTask extends DefaultTask {
 
     @TaskAction
     void generateKey() {
-        getProject().file(keyFile).delete();
+        File fileKeyFile = getProject().file(keyFile);
+        if(fileKeyFile.exists()) {
+            fileKeyFile.delete();
+        }
         getProject().exec(execSpec -> {
             execSpec.setIgnoreExitValue(true);
             execSpec.workingDir(".");

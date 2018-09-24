@@ -4,6 +4,7 @@ import org.gradle.api.DefaultTask;
 import org.gradle.api.tasks.Input;
 import org.gradle.api.tasks.TaskAction;
 
+import java.io.File;
 import java.util.Arrays;
 import java.util.List;
 
@@ -39,7 +40,10 @@ public class PKCS12Task extends DefaultTask {
 
     @TaskAction
     void generatePKCS12() {
-        getProject().file(pkcs12File).delete();
+        File filePkcs12File = getProject().file(pkcs12File);
+        if(filePkcs12File.exists()) {
+            filePkcs12File.delete();
+        }
         getProject().exec(execSpec -> {
             execSpec.setIgnoreExitValue(true);
             execSpec.workingDir(".");
