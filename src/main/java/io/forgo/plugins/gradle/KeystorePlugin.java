@@ -20,15 +20,14 @@ public class KeystorePlugin implements Plugin<Project> {
 
     private void addSSLKeyTask(Project project, KeystoreExtension extension) {
         project.getTasks().create(TASK_SSL_KEY, SSLKeyTask.class, task -> {
-            task.keyFile = extension.getKeyFile();
-//            task.setKeyFile(extension.getKeyFile());
+            task.setKeyFile(extension.getKeyFile());
             task.setKeyPassword(extension.getKeyPassword());
         });
     }
 
     private void addSSLCertTask(Project project, KeystoreExtension extension) {
         project.getTasks().create(TASK_SSL_CERT, SSLCertTask.class, task -> {
-//            task.setKeyFile(extension.getKeyFile());
+            task.setKeyFile(extension.getKeyFile());
             task.setKeyPassword(extension.getKeyPassword());
             task.setCertFile(extension.getCertFile());
             task.dependsOn(project.getTasks().getByName(TASK_SSL_KEY));
@@ -37,7 +36,7 @@ public class KeystorePlugin implements Plugin<Project> {
 
     private void addPKCS12Task(Project project, KeystoreExtension extension) {
         project.getTasks().create(TASK_PKCS12, PKCS12Task.class, task -> {
-//            task.setKeyFile(extension.getKeyFile());
+            task.setKeyFile(extension.getKeyFile());
             task.setKeyPassword(extension.getKeyPassword());
             task.setCertFile(extension.getCertFile());
             task.setPkcs12File(extension.getPkcs12File());
@@ -49,7 +48,7 @@ public class KeystorePlugin implements Plugin<Project> {
 
     private void addJKSTask(Project project, KeystoreExtension extension) {
         project.getTasks().create(TASK_JKS, JKSTask.class, task -> {
-//            task.setKeyFile(extension.getKeyFile());
+            task.setKeyFile(extension.getKeyFile());
             task.setCertFile(extension.getCertFile());
             task.setPkcs12File(extension.getPkcs12File());
             task.setPkcs12Password(extension.getPkcs12Password());

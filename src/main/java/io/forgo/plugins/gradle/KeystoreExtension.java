@@ -1,15 +1,12 @@
 package io.forgo.plugins.gradle;
 
 import org.gradle.api.Project;
-import org.gradle.api.provider.PropertyState;
-
-import java.io.File;
 
 public class KeystoreExtension {
 
     static final String EXTENSION_NAME = "keystore";
 
-//    private static final PropertyState<String> DEFAULT_KEY_FILE = new PropertyState<String>("debug.key");
+    private static final String DEFAULT_KEY_FILE = "debug.key";
     private static final String DEFAULT_KEY_PASSWORD = "password";
     private static final String DEFAULT_CERT_FILE = "debug.crt";
     private static final String DEFAULT_PKCS12_FILE = "debug.pkcs12";
@@ -18,11 +15,7 @@ public class KeystoreExtension {
     private static final String DEFAULT_JKS_PASSWORD = "password";
     private static final String DEFAULT_ALIAS = "debug";
 
-    public PropertyState<String> getKeyFile() {
-        return keyFile;
-    }
-
-    final PropertyState<String> keyFile;
+    String keyFile;
     String keyPassword;
     String certFile;
     String pkcs12File;
@@ -32,17 +25,14 @@ public class KeystoreExtension {
     String alias;
 
     public KeystoreExtension(Project project) {
-        this.keyFile = project.property(String.class);
+
     }
 
-//    public PropertyState<String> getKeyFile() {
-//        return keyFile;
-//    }
-//    public PropertyState<String> getKeyFile() {
-//        return this.keyFile == null
-//                ?
-//                : this.keyFile;
-//    }
+    public String getKeyFile() {
+        return this.keyFile == null
+                ? DEFAULT_KEY_FILE
+                : this.keyFile;
+    }
 
     public String getKeyPassword() {
         return this.keyPassword == null
@@ -85,52 +75,4 @@ public class KeystoreExtension {
                 ? DEFAULT_ALIAS
                 : this.alias;
     }
-
-//    public void setKeyFile(final String keyFile) {
-//        this.keyFile = keyFile == null
-//                ? DEFAULT_KEY_FILE
-//                : keyFile;
-//    }
-//
-//    public void setKeyPassword(final String keyPassword) {
-//        this.keyPassword = keyPassword == null
-//                ? DEFAULT_KEY_PASSWORD
-//                : keyPassword;
-//    }
-//
-//    public void setCertFile(final String certFile) {
-//        this.certFile = certFile == null
-//                ? DEFAULT_CERT_FILE
-//                : certFile;
-//    }
-//
-//    public void setPkcs12File(final String pkcs12File) {
-//        this.pkcs12File = pkcs12File == null
-//                ? DEFAULT_PKCS12_FILE
-//                : pkcs12File;
-//    }
-//
-//    public void setPkcs12Password(final String pkcs12Password) {
-//        this.pkcs12Password = pkcs12Password == null
-//                ? DEFAULT_PKCS12_PASSWORD
-//                : pkcs12Password;
-//    }
-//
-//    public void setJksFile(final String jksFile) {
-//        this.jksFile = jksFile == null
-//                ? DEFAULT_JKS_FILE
-//                : jksFile;
-//    }
-//
-//    public void setJksPassword(final String jksPassword) {
-//        this.jksPassword = jksPassword == null
-//                ? DEFAULT_JKS_PASSWORD
-//                : jksPassword;
-//    }
-//
-//    public void setAlias(final String alias) {
-//        this.alias = alias == null
-//                ? DEFAULT_ALIAS
-//                : alias;
-//    }
 }

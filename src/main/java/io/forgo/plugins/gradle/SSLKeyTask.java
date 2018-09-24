@@ -1,7 +1,6 @@
 package io.forgo.plugins.gradle;
 
 import org.gradle.api.DefaultTask;
-import org.gradle.api.provider.PropertyState;
 import org.gradle.api.tasks.TaskAction;
 
 import java.io.File;
@@ -20,18 +19,14 @@ public class SSLKeyTask extends DefaultTask {
         return "Keystore Gradle Plugin";
     }
 
-
-    //    public void setKeyFile(PropertyState<String> keyFile) {
-//        this.keyFile = keyFile;
-//    }
-    File keyFile = getProject().file(getProject().property(File.class));
+    private String keyFile;
     private String keyPassword;
 
     @TaskAction
     void generateKey() {
-//        File fileKeyFile = getProject().file(this.keyFile);
-        if(this.keyFile.exists()) {
-            this.keyFile.delete();
+        File fileKeyFile = getProject().file(this.keyFile);
+        if(fileKeyFile.exists()) {
+            fileKeyFile.delete();
         }
         getProject().exec(execSpec -> {
             execSpec.setIgnoreExitValue(true);
@@ -40,16 +35,16 @@ public class SSLKeyTask extends DefaultTask {
             List<String> args = Arrays.asList(
                     "genrsa",
                     "-des3",
-                    "-out", this.keyFile.toString(),
+                    "-out", this.keyFile,
                     "-passout", "pass:"+this.keyPassword
             );
             execSpec.setArgs(args);
         });
     }
 
-//    public void setKeyFile(String keyFile) {
-//        this.keyFile = keyFile;
-//    }
+    public void setKeyFile(String keyFile) {
+        this.keyFile = keyFile;
+    }
 
 
     public void setKeyPassword(String keyPassword) {
