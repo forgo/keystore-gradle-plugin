@@ -21,6 +21,7 @@ repositories {
 }
 
 dependencies {
+    compile gradleApi()
     testCompile group: 'junit', name: 'junit', version: "${project.junitVersion}"
 }
 
