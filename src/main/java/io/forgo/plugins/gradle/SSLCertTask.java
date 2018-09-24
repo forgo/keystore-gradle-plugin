@@ -31,10 +31,10 @@ public class SSLCertTask extends DefaultTask {
 
     @TaskAction
     void generateCert() {
-        File fileCertFile = getProject().file(certFile);
-        if(fileCertFile.exists()) {
-            fileCertFile.delete();
-        }
+//        File fileCertFile = getProject().file(certFile);
+//        if(fileCertFile.exists()) {
+//            fileCertFile.delete();
+//        }
         getProject().file(certFile).delete();
         getProject().exec(execSpec -> {
             execSpec.setIgnoreExitValue(true);
