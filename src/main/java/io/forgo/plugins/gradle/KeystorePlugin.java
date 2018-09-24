@@ -4,52 +4,74 @@ import org.gradle.api.Plugin;
 import org.gradle.api.Project;
 
 public class KeystorePlugin implements Plugin<Project> {
+
+    private static final String TASK_SSL_KEY = "sslKey";
+    private static final String TASK_SSL_CERT = "sslCert";
+    private static final String TASK_PKCS12 = "pkcs12";
+    private static final String TASK_JKS = "jks";
+
     public void apply(Project project) {
-        KeystoreExtension extension = project.getExtensions().create(KeystoreExtension.EXTENSION_NAME, KeystoreExtension.class, project);
-        addSSLKeyTask(project, extension);
-        addSSLCertTask(project, extension);
-        addPKCS12Task(project, extension);
-        addKeystoreTask(project, extension);
+        project.getExtensions().add(KeystoreExtension.EXTENSION_NAME, KeystoreExtension.class);
+        addSSLKeyTask(project);
+        addSSLCertTask(project);
+        addPKCS12Task(project);
+        addJKSTask(project);
     }
 
-    private void addSSLKeyTask(Project project, KeystoreExtension extension) {
-        SSLKeyTask task = project.getTasks().create("sslKey", SSLKeyTask.class);
-        // assign configs brought in from build.gradle
-        task.setKeyFile(extension.getKeyFile());
-        task.setKeyPassword(extension.getKeyPassword());
+    private void addSSLKeyTask(Project project) {
+        project.getTasks().create(TASK_SSL_KEY, SSLKeyTask.class, task ->
+            project.afterEvaluate(p -> {
+                // assign configs brought in from build.gradle
+                KeystoreExtension extension = (KeystoreExtension) p.getExtensions().getByName(KeystoreExtension.EXTENSION_NAME);
+                task.setKeyFile(extension.getKeyFile());
+                task.setKeyPassword(extension.getKeyPassword());
+            })
+        );
     }
 
-    private void addSSLCertTask(Project project, KeystoreExtension extension) {
-        SSLCertTask task = project.getTasks().create("sslCert", SSLCertTask.class);
-        // assign configs brought in from build.gradle
-        task.setKeyFile(extension.getKeyFile());
-        task.setKeyPassword(extension.getKeyPassword());
-        task.setCertFile(extension.getCertFile());
-        task.dependsOn(project.getTasks().getByName("sslKey"));
+    private void addSSLCertTask(Project project) {
+        project.getTasks().create(TASK_SSL_CERT, SSLCertTask.class, task -> {
+            project.afterEvaluate(p -> {
+                // assign configs brought in from build.gradle
+                KeystoreExtension extension = (KeystoreExtension) p.getExtensions().getByName(KeystoreExtension.EXTENSION_NAME);
+                task.setKeyFile(extension.getKeyFile());
+                task.setKeyPassword(extension.getKeyPassword());
+                task.setCertFile(extension.getCertFile());
+            });
+            task.dependsOn(project.getTasks().getByName(TASK_SSL_KEY));
+        });
     }
 
-    private void addPKCS12Task(Project project, KeystoreExtension extension) {
-        PKCS12Task task = project.getTasks().create("pkcs12", PKCS12Task.class);
-        // assign configs brought in from build.gradle
-        task.setKeyFile(extension.getKeyFile());
-        task.setKeyPassword(extension.getKeyPassword());
-        task.setCertFile(extension.getCertFile());
-        task.setPkcs12File(extension.getPkcs12File());
-        task.setPkcs12Password(extension.getPkcs12Password());
-        task.setKeystoreAlias(extension.getKeystoreAlias());
-        task.dependsOn(project.getTasks().getByName("sslCert"));
+    private void addPKCS12Task(Project project) {
+        project.getTasks().create(TASK_PKCS12, PKCS12Task.class, task -> {
+            project.afterEvaluate(p -> {
+                // assign configs brought in from build.gradle
+                KeystoreExtension extension = (KeystoreExtension) p.getExtensions().getByName(KeystoreExtension.EXTENSION_NAME);
+                task.setKeyFile(extension.getKeyFile());
+                task.setKeyPassword(extension.getKeyPassword());
+                task.setCertFile(extension.getCertFile());
+                task.setPkcs12File(extension.getPkcs12File());
+                task.setPkcs12Password(extension.getPkcs12Password());
+                task.setKeystoreAlias(extension.getKeystoreAlias());
+            });
+            task.dependsOn(project.getTasks().getByName(TASK_SSL_CERT));
+        });
     }
 
-    private void addKeystoreTask(Project project, KeystoreExtension extension) {
-        KeystoreTask task = project.getTasks().create("jks", KeystoreTask.class);
-        // assign configs brought in from build.gradle
-        task.setKeyFile(extension.getKeyFile());
-        task.setCertFile(extension.getCertFile());
-        task.setPkcs12File(extension.getPkcs12File());
-        task.setPkcs12Password(extension.getPkcs12Password());
-        task.setKeystoreFile(extension.getKeystoreFile());
-        task.setKeystorePassword(extension.getKeystorePassword());
-        task.dependsOn(project.getTasks().getByName("pkcs12"));
+    private void addJKSTask(Project project) {
+        project.getTasks().create(TASK_JKS, JKSTask.class, task -> {
+            project.afterEvaluate(p -> {
+                // assign configs brought in from build.gradle
+                KeystoreExtension extension = (KeystoreExtension) p.getExtensions().getByName(KeystoreExtension.EXTENSION_NAME);
+                task.setKeyFile(extension.getKeyFile());
+                task.setCertFile(extension.getCertFile());
+                task.setPkcs12File(extension.getPkcs12File());
+                task.setPkcs12Password(extension.getPkcs12Password());
+                task.setKeystoreFile(extension.getKeystoreFile());
+                task.setKeystorePassword(extension.getKeystorePassword());
+            });
+            task.dependsOn(project.getTasks().getByName(TASK_PKCS12));
+        });
     }
 
 }

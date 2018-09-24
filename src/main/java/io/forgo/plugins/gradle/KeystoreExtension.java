@@ -1,132 +1,120 @@
 package io.forgo.plugins.gradle;
 
-import org.gradle.api.Project;
-import org.gradle.api.Task;
-
 public class KeystoreExtension {
 
     static final String EXTENSION_NAME = "keystore";
 
-    private Project project;
-    private Task task;
+    private static final String DEFAULT_KEY_FILE = "debug.key";
+    private static final String DEFAULT_KEY_PASSWORD = "password";
+    private static final String DEFAULT_CERT_FILE = "debug.crt";
+    private static final String DEFAULT_PKCS12_FILE = "debug.pkcs12";
+    private static final String DEFAULT_PKCS12_PASSWORD = "password";
+    private static final String DEFAULT_KEYSTORE_FILE = "debug.jks";
+    private static final String DEFAULT_KEYSTORE_PASSWORD = "password";
+    private static final String DEFAULT_KEYSTORE_ALIAS = "my_alias";
 
-    private String keyFile;
-    private String keyPassword;
-    private String certFile;
-    private String pkcs12File;
-    private String pkcs12Password;
-    private String keystoreFile;
-    private String keystorePassword;
-    private String keystoreAlias;
-
-    public KeystoreExtension(Project project) {
-        this.project = project;
-
-        // set default values here
-        this.keyFile = "debug.key";
-        this.keyPassword = "password";
-        this.certFile = "debug.crt";
-        this.pkcs12File = "debug.pkcs12";
-        this.pkcs12Password = "password";
-        this.keystoreFile = "keystore.jks";
-        this.keystorePassword = "password";
-        this.keystoreAlias = "jetty";
-    }
-
-    protected KeystoreExtension(Task task) {
-        this.task = task;
-    }
-
-    private KeystoreExtension getTaskExtension() {
-        return (KeystoreExtension)this.task
-                .getProject().getExtensions().getByName(EXTENSION_NAME);
-    }
+    String keyFile;
+    String keyPassword;
+    String certFile;
+    String pkcs12File;
+    String pkcs12Password;
+    String keystoreFile;
+    String keystorePassword;
+    String keystoreAlias;
 
     public String getKeyFile() {
-        if(task != null && this.keyFile == null) {
-            this.keyFile = getTaskExtension().getKeyFile();
-        }
-        return keyFile;
+        return this.keyFile == null
+                ? DEFAULT_KEY_FILE
+                : this.keyFile;
     }
 
     public String getKeyPassword() {
-        if(task != null && this.keyPassword == null) {
-            this.keyPassword = getTaskExtension().getKeyFile();
-        }
-        return keyPassword;
+        return this.keyPassword == null
+                ? DEFAULT_KEY_PASSWORD
+                : this.keyPassword;
     }
 
     public String getCertFile() {
-        if(task != null && this.certFile == null) {
-            this.certFile = getTaskExtension().getKeyFile();
-        }
-        return certFile;
+        return this.certFile == null
+                ? DEFAULT_CERT_FILE
+                : this.certFile;
     }
 
     public String getPkcs12File() {
-        if(task != null && this.pkcs12File == null) {
-            this.pkcs12File = getTaskExtension().getKeyFile();
-        }
-        return pkcs12File;
+        return this.pkcs12File == null
+                ? DEFAULT_PKCS12_FILE
+                : this.pkcs12File;
     }
 
     public String getPkcs12Password() {
-        if(task != null && this.pkcs12Password == null) {
-            this.pkcs12Password = getTaskExtension().getKeyFile();
-        }
-        return pkcs12Password;
+        return this.pkcs12Password == null
+                ? DEFAULT_PKCS12_PASSWORD
+                : this.pkcs12Password;
     }
 
     public String getKeystoreFile() {
-        if(task != null && this.keystoreFile == null) {
-            this.keystoreFile = getTaskExtension().getKeyFile();
-        }
-        return keystoreFile;
+        return this.keystoreFile == null
+                ? DEFAULT_KEYSTORE_FILE
+                : this.keystoreFile;
     }
 
     public String getKeystorePassword() {
-        if(task != null && this.keystorePassword == null) {
-            this.keystorePassword = getTaskExtension().getKeyFile();
-        }
-        return keystorePassword;
+        return this.keystorePassword == null
+                ? DEFAULT_KEYSTORE_PASSWORD
+                : this.keystorePassword;
     }
 
     public String getKeystoreAlias() {
-        if(task != null && this.keystoreAlias == null) {
-            this.keystoreAlias = getTaskExtension().getKeyFile();
-        }
-        return keystoreAlias;
+        return this.keystoreAlias == null
+                ? DEFAULT_KEYSTORE_ALIAS
+                : this.keystoreAlias;
     }
 
     public void setKeyFile(final String keyFile) {
-        this.keyFile = keyFile;
+        this.keyFile = keyFile == null
+                ? DEFAULT_KEY_FILE
+                : keyFile;
     }
 
     public void setKeyPassword(final String keyPassword) {
-        this.keyPassword = keyPassword;
+        this.keyPassword = keyPassword == null
+                ? DEFAULT_KEY_PASSWORD
+                : keyPassword;
     }
 
     public void setCertFile(final String certFile) {
-        this.certFile = certFile;
+        this.certFile = certFile == null
+                ? DEFAULT_CERT_FILE
+                : certFile;
     }
 
     public void setPkcs12File(final String pkcs12File) {
-        this.pkcs12File = pkcs12File;
+        this.pkcs12File = pkcs12File == null
+                ? DEFAULT_PKCS12_FILE
+                : pkcs12File;
     }
 
     public void setPkcs12Password(final String pkcs12Password) {
-        this.pkcs12Password = pkcs12Password;
+        this.pkcs12Password = pkcs12Password == null
+                ? DEFAULT_PKCS12_PASSWORD
+                : pkcs12Password;
     }
 
     public void setKeystoreFile(final String keystoreFile) {
-        this.keystoreFile = keystoreFile;
+        this.keystoreFile = keystoreFile == null
+                ? DEFAULT_KEYSTORE_FILE
+                : keystoreFile;
     }
 
     public void setKeystorePassword(final String keystorePassword) {
-        this.keystorePassword = keystorePassword;
+        this.keystorePassword = keystorePassword == null
+                ? DEFAULT_KEYSTORE_PASSWORD
+                : keystorePassword;
     }
 
     public void setKeystoreAlias(final String keystoreAlias) {
-        this.keystoreAlias = keystoreAlias;
+        this.keystoreAlias = keystoreAlias == null
+                ? DEFAULT_KEYSTORE_ALIAS
+                : keystoreAlias;
     }
 }

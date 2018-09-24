@@ -7,7 +7,7 @@ import java.io.File;
 import java.util.Arrays;
 import java.util.List;
 
-public class KeystoreTask extends DefaultTask {
+public class JKSTask extends DefaultTask {
 
     @Override
     public String getDescription() {
