@@ -1,10 +1,13 @@
 package io.forgo.plugins.gradle;
 
+import org.gradle.api.Project;
+import org.gradle.api.provider.PropertyState;
+
 public class KeystoreExtension {
 
     static final String EXTENSION_NAME = "keystore";
 
-    private static final String DEFAULT_KEY_FILE = "debug.key";
+//    private static final PropertyState<String> DEFAULT_KEY_FILE = new PropertyState<String>("debug.key");
     private static final String DEFAULT_KEY_PASSWORD = "password";
     private static final String DEFAULT_CERT_FILE = "debug.crt";
     private static final String DEFAULT_PKCS12_FILE = "debug.pkcs12";
@@ -13,7 +16,11 @@ public class KeystoreExtension {
     private static final String DEFAULT_JKS_PASSWORD = "password";
     private static final String DEFAULT_ALIAS = "debug";
 
-    private String keyFile;
+    public PropertyState<String> getKeyFile() {
+        return keyFile;
+    }
+
+    final private PropertyState<String> keyFile;
     private String keyPassword;
     private String certFile;
     private String pkcs12File;
@@ -22,22 +29,18 @@ public class KeystoreExtension {
     private String jksPassword;
     private String alias;
 
-    public KeystoreExtension(String keyFile, String keyPassword, String certFile, String pkcs12File, String pkcs12Password, String jksFile, String jksPassword, String alias) {
-        this.keyFile = keyFile;
-        this.keyPassword = keyPassword;
-        this.certFile = certFile;
-        this.pkcs12File = pkcs12File;
-        this.pkcs12Password = pkcs12Password;
-        this.jksFile = jksFile;
-        this.jksPassword = jksPassword;
-        this.alias = alias;
+    public KeystoreExtension(Project project) {
+        this.keyFile = project.property(String.class);
     }
 
-    public String getKeyFile() {
-        return this.keyFile == null
-                ? DEFAULT_KEY_FILE
-                : this.keyFile;
-    }
+//    public PropertyState<String> getKeyFile() {
+//        return keyFile;
+//    }
+//    public PropertyState<String> getKeyFile() {
+//        return this.keyFile == null
+//                ?
+//                : this.keyFile;
+//    }
 
     public String getKeyPassword() {
         return this.keyPassword == null
