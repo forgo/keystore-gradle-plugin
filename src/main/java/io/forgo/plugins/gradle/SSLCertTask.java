@@ -16,17 +16,17 @@ public class SSLCertTask extends DefaultTask {
 
     @Override
     public String getGroup() {
-        return "keystore";
+        return "Keystore Gradle Plugin";
     }
 
     @Input
-    String keyFile;
+    private String keyFile;
 
     @Input
-    String keyPassword;
+    private String keyPassword;
 
     @Input
-    String certFile;
+    private String certFile;
 
     @TaskAction
     void generateCert() {
@@ -46,5 +46,29 @@ public class SSLCertTask extends DefaultTask {
             );
             execSpec.setArgs(args);
         });
+    }
+
+    public String getKeyFile() {
+        return keyFile;
+    }
+
+    public void setKeyFile(String keyFile) {
+        this.keyFile = keyFile;
+    }
+
+    public String getKeyPassword() {
+        return keyPassword;
+    }
+
+    public void setKeyPassword(String keyPassword) {
+        this.keyPassword = keyPassword;
+    }
+
+    public String getCertFile() {
+        return certFile;
+    }
+
+    public void setCertFile(String certFile) {
+        this.certFile = certFile;
     }
 }

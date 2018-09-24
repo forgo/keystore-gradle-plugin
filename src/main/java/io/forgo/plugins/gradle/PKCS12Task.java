@@ -16,26 +16,26 @@ public class PKCS12Task extends DefaultTask {
 
     @Override
     public String getGroup() {
-        return "keystore";
+        return "Keystore Gradle Plugin";
     }
 
     @Input
-    String keyFile;
+    private String keyFile;
 
     @Input
-    String keyPassword;
+    private String keyPassword;
 
     @Input
-    String certFile;
+    private String certFile;
 
     @Input
-    String pkcs12File;
+    private String pkcs12File;
 
     @Input
-    String pkcs12Password;
+    private String pkcs12Password;
 
     @Input
-    String keystoreAlias;
+    private String keystoreAlias;
 
     @TaskAction
     void generatePKCS12() {
@@ -56,5 +56,53 @@ public class PKCS12Task extends DefaultTask {
             );
             execSpec.setArgs(args);
         });
+    }
+
+    public String getKeyFile() {
+        return keyFile;
+    }
+
+    public void setKeyFile(String keyFile) {
+        this.keyFile = keyFile;
+    }
+
+    public String getKeyPassword() {
+        return keyPassword;
+    }
+
+    public void setKeyPassword(String keyPassword) {
+        this.keyPassword = keyPassword;
+    }
+
+    public String getCertFile() {
+        return certFile;
+    }
+
+    public void setCertFile(String certFile) {
+        this.certFile = certFile;
+    }
+
+    public String getPkcs12File() {
+        return pkcs12File;
+    }
+
+    public void setPkcs12File(String pkcs12File) {
+        this.pkcs12File = pkcs12File;
+    }
+
+    public String getPkcs12Password() {
+        return pkcs12Password;
+    }
+
+    public void setPkcs12Password(String pkcs12Password) {
+        this.pkcs12Password = pkcs12Password;
+    }
+
+    public String getKeystoreAlias() {
+        return keystoreAlias;
+    }
+
+    public void setKeystoreAlias(String keystoreAlias) {
+        this.keystoreAlias = keystoreAlias;
     }
 }

@@ -5,58 +5,50 @@ import org.gradle.api.Project;
 
 public class KeystorePlugin implements Plugin<Project> {
     public void apply(Project project) {
-        project.getExtensions().add("keystore", KeystoreExtension.class);
-        addSSLKeyTask(project);
-        addSSLCertTask(project);
-        addPKCS12Task(project);
-        addKeystoreTask(project);
+        KeystoreExtension extension = project.getExtensions().create("keystore", KeystoreExtension.class, project);
+        addSSLKeyTask(project, extension);
+        addSSLCertTask(project, extension);
+        addPKCS12Task(project, extension);
+        addKeystoreTask(project, extension);
     }
 
-    private KeystoreExtension getKeystoreExtension(Project project) {
-        return project.getExtensions().getByType(KeystoreExtension.class);
-    }
-
-    private void addSSLKeyTask(Project project) {
+    private void addSSLKeyTask(Project project, KeystoreExtension extension) {
         SSLKeyTask task = project.getTasks().create("sslKey", SSLKeyTask.class);
-        KeystoreExtension keystoreExtension = getKeystoreExtension(project);
         // assign configs brought in from build.gradle
-        task.keyFile = keystoreExtension.keyFile;
-        task.keyPassword = keystoreExtension.keyPassword;
+        task.setKeyFile(extension.getKeyFile());
+        task.setKeyPassword(extension.getKeyPassword());
     }
 
-    private void addSSLCertTask(Project project) {
+    private void addSSLCertTask(Project project, KeystoreExtension extension) {
         SSLCertTask task = project.getTasks().create("sslCert", SSLCertTask.class);
-        KeystoreExtension keystoreExtension = getKeystoreExtension(project);
         // assign configs brought in from build.gradle
-        task.keyFile = keystoreExtension.keyFile;
-        task.keyPassword = keystoreExtension.keyPassword;
-        task.certFile = keystoreExtension.certFile;
+        task.setKeyFile(extension.getKeyFile());
+        task.setKeyPassword(extension.getKeyPassword());
+        task.setCertFile(extension.getCertFile());
         task.dependsOn(project.getTasks().getByName("sslKey"));
     }
 
-    private void addPKCS12Task(Project project) {
+    private void addPKCS12Task(Project project, KeystoreExtension extension) {
         PKCS12Task task = project.getTasks().create("pkcs12", PKCS12Task.class);
-        KeystoreExtension keystoreExtension = getKeystoreExtension(project);
         // assign configs brought in from build.gradle
-        task.keyFile = keystoreExtension.keyFile;
-        task.keyPassword = keystoreExtension.keyPassword;
-        task.certFile = keystoreExtension.certFile;
-        task.pkcs12File = keystoreExtension.pkcs12File;
-        task.pkcs12Password = keystoreExtension.pkcs12Password;
-        task.keystoreAlias = keystoreExtension.keystoreAlias;
+        task.setKeyFile(extension.getKeyFile());
+        task.setKeyPassword(extension.getKeyPassword());
+        task.setCertFile(extension.getCertFile());
+        task.setPkcs12File(extension.getPkcs12File());
+        task.setPkcs12Password(extension.getPkcs12Password());
+        task.setKeystoreAlias(extension.getKeystoreAlias());
         task.dependsOn(project.getTasks().getByName("sslCert"));
     }
 
-    private void addKeystoreTask(Project project) {
+    private void addKeystoreTask(Project project, KeystoreExtension extension) {
         KeystoreTask task = project.getTasks().create("jks", KeystoreTask.class);
-        KeystoreExtension keystoreExtension = getKeystoreExtension(project);
         // assign configs brought in from build.gradle
-        task.keyFile = keystoreExtension.keyFile;
-        task.certFile = keystoreExtension.certFile;
-        task.pkcs12File = keystoreExtension.pkcs12File;
-        task.pkcs12Password = keystoreExtension.pkcs12Password;
-        task.keystoreFile = keystoreExtension.keystoreFile;
-        task.keystorePassword = keystoreExtension.keystorePassword;
+        task.setKeyFile(extension.getKeyFile());
+        task.setCertFile(extension.getCertFile());
+        task.setPkcs12File(extension.getPkcs12File());
+        task.setPkcs12Password(extension.getPkcs12Password());
+        task.setKeystoreFile(extension.getKeystoreFile());
+        task.setKeystorePassword(extension.getKeystorePassword());
         task.dependsOn(project.getTasks().getByName("pkcs12"));
     }
 

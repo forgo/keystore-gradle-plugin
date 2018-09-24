@@ -1,15 +1,47 @@
 package io.forgo.plugins.gradle;
 
+import org.gradle.api.Project;
+import org.gradle.api.tasks.Input;
+
 public class KeystoreExtension {
-    String keyFile;
-    String keyPassword;
-    String certFile;
-    String pkcs12File;
-    String pkcs12Password;
-    String keystoreFile;
-    String keystorePassword;
-    String keystoreAlias;
-    
+
+    @Input
+    private String keyFile;
+
+    @Input
+    private String keyPassword;
+
+    @Input
+    private String certFile;
+
+    @Input
+    private String pkcs12File;
+
+    @Input
+    private String pkcs12Password;
+
+    @Input
+    private String keystoreFile;
+
+    @Input
+    private String keystorePassword;
+
+    @Input
+    private String keystoreAlias;
+
+    public KeystoreExtension(Project project) {
+        // set default values here
+        this.keyFile = "debug.key";
+        this.keyPassword = "password";
+        this.certFile = "debug.crt";
+        this.pkcs12File = "debug.pkcs12";
+        this.pkcs12Password = "password";
+        this.keystoreFile = "keystore";
+        this.keystorePassword = "password";
+        this.keystoreFile = "keystore.jks";
+        this.keystoreAlias = "jetty";
+    }
+
     public String getKeyFile() {
         return keyFile;
     }
