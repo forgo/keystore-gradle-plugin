@@ -24,14 +24,14 @@ public class SSLKeyTask extends DefaultTask {
     //    public void setKeyFile(PropertyState<String> keyFile) {
 //        this.keyFile = keyFile;
 //    }
-    PropertyState<File> keyFile = getProject().property(File.class);
+    File keyFile = getProject().file(getProject().property(File.class));
     private String keyPassword;
 
     @TaskAction
     void generateKey() {
-        File fileKeyFile = getProject().file(this.keyFile);
-        if(fileKeyFile.exists()) {
-            fileKeyFile.delete();
+//        File fileKeyFile = getProject().file(this.keyFile);
+        if(this.keyFile.exists()) {
+            this.keyFile.delete();
         }
         getProject().exec(execSpec -> {
             execSpec.setIgnoreExitValue(true);
@@ -40,7 +40,7 @@ public class SSLKeyTask extends DefaultTask {
             List<String> args = Arrays.asList(
                     "genrsa",
                     "-des3",
-                    "-out", this.keyFile.get().toString(),
+                    "-out", this.keyFile.toString(),
                     "-passout", "pass:"+this.keyPassword
             );
             execSpec.setArgs(args);

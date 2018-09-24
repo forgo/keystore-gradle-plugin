@@ -18,11 +18,11 @@ public class KeystoreExtension {
     private static final String DEFAULT_JKS_PASSWORD = "password";
     private static final String DEFAULT_ALIAS = "debug";
 
-    public PropertyState<File> getKeyFile() {
+    public PropertyState<String> getKeyFile() {
         return keyFile;
     }
 
-    final PropertyState<File> keyFile;
+    final PropertyState<String> keyFile;
     String keyPassword;
     String certFile;
     String pkcs12File;
@@ -32,7 +32,7 @@ public class KeystoreExtension {
     String alias;
 
     public KeystoreExtension(Project project) {
-        this.keyFile = project.property(File.class);
+        this.keyFile = project.property(String.class);
     }
 
 //    public PropertyState<String> getKeyFile() {
