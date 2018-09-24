@@ -3,6 +3,8 @@ package io.forgo.plugins.gradle;
 import org.gradle.api.Project;
 import org.gradle.api.provider.PropertyState;
 
+import java.io.File;
+
 public class KeystoreExtension {
 
     static final String EXTENSION_NAME = "keystore";
@@ -16,11 +18,11 @@ public class KeystoreExtension {
     private static final String DEFAULT_JKS_PASSWORD = "password";
     private static final String DEFAULT_ALIAS = "debug";
 
-    public PropertyState<String> getKeyFile() {
+    public PropertyState<File> getKeyFile() {
         return keyFile;
     }
 
-    final private PropertyState<String> keyFile;
+    final private PropertyState<File> keyFile;
     private String keyPassword;
     private String certFile;
     private String pkcs12File;
@@ -30,7 +32,7 @@ public class KeystoreExtension {
     private String alias;
 
     public KeystoreExtension(Project project) {
-        this.keyFile = project.property(String.class);
+        this.keyFile = project.property(File.class);
     }
 
 //    public PropertyState<String> getKeyFile() {

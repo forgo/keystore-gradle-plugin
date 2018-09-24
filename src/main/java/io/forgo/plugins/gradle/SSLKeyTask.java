@@ -23,8 +23,7 @@ public class SSLKeyTask extends DefaultTask {
 //    public void setKeyFile(PropertyState<String> keyFile) {
 //        this.keyFile = keyFile;
 //    }
-
-    PropertyState<String> keyFile = getProject().property(String.class);
+    PropertyState<File> keyFile = getProject().property(File.class);
     private String keyPassword;
 
     @TaskAction
@@ -40,7 +39,7 @@ public class SSLKeyTask extends DefaultTask {
             List<String> args = Arrays.asList(
                     "genrsa",
                     "-des3",
-                    "-out", this.keyFile.get(),
+                    "-out", this.keyFile.get().toString(),
                     "-passout", "pass:"+this.keyPassword
             );
             execSpec.setArgs(args);
