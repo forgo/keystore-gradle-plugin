@@ -22,14 +22,14 @@ public class KeystoreExtension {
         return keyFile;
     }
 
-    final private PropertyState<File> keyFile;
-    private String keyPassword;
-    private String certFile;
-    private String pkcs12File;
-    private String pkcs12Password;
-    private String jksFile;
-    private String jksPassword;
-    private String alias;
+    final PropertyState<File> keyFile;
+    String keyPassword;
+    String certFile;
+    String pkcs12File;
+    String pkcs12Password;
+    String jksFile;
+    String jksPassword;
+    String alias;
 
     public KeystoreExtension(Project project) {
         this.keyFile = project.property(File.class);

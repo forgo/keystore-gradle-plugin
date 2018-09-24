@@ -20,7 +20,8 @@ public class SSLKeyTask extends DefaultTask {
         return "Keystore Gradle Plugin";
     }
 
-//    public void setKeyFile(PropertyState<String> keyFile) {
+
+    //    public void setKeyFile(PropertyState<String> keyFile) {
 //        this.keyFile = keyFile;
 //    }
     PropertyState<File> keyFile = getProject().property(File.class);
