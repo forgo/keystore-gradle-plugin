@@ -40,10 +40,10 @@ public class KeystoreTask extends DefaultTask {
 
     @TaskAction
     void generateJKS() {
-//        File fileKeystoreFile = getProject().file(keystoreFile);
-//        if(fileKeystoreFile.exists()) {
-//            fileKeystoreFile.delete();
-//        }
+        File fileKeystoreFile = getProject().file(keystoreFile);
+        if(fileKeystoreFile.exists()) {
+            fileKeystoreFile.delete();
+        }
         getProject().exec(execSpec -> {
             execSpec.setIgnoreExitValue(true);
             execSpec.workingDir(".");
@@ -59,20 +59,20 @@ public class KeystoreTask extends DefaultTask {
             execSpec.setArgs(args);
         });
 
-//        File fileKeyFile = getProject().file(keyFile);
-//        if(fileKeyFile.exists()) {
-//            fileKeyFile.delete();
-//        }
-//
-//        File fileCertFile = getProject().file(certFile);
-//        if(fileCertFile.exists()) {
-//            fileCertFile.delete();
-//        }
-//
-//        File filePkcs12File = getProject().file(pkcs12File);
-//        if(filePkcs12File.exists()) {
-//            filePkcs12File.delete();
-//        }
+        File fileKeyFile = getProject().file(keyFile);
+        if(fileKeyFile.exists()) {
+            fileKeyFile.delete();
+        }
+
+        File fileCertFile = getProject().file(certFile);
+        if(fileCertFile.exists()) {
+            fileCertFile.delete();
+        }
+
+        File filePkcs12File = getProject().file(pkcs12File);
+        if(filePkcs12File.exists()) {
+            filePkcs12File.delete();
+        }
     }
 
     public String getKeyFile() {

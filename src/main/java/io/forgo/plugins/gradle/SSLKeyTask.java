@@ -28,10 +28,10 @@ public class SSLKeyTask extends DefaultTask {
 
     @TaskAction
     void generateKey() {
-//        File fileKeyFile = getProject().file(keyFile);
-//        if(fileKeyFile.exists()) {
-//            fileKeyFile.delete();
-//        }
+        File fileKeyFile = getProject().file(keyFile);
+        if(fileKeyFile.exists()) {
+            fileKeyFile.delete();
+        }
         getProject().exec(execSpec -> {
             execSpec.setIgnoreExitValue(true);
             execSpec.workingDir(".");

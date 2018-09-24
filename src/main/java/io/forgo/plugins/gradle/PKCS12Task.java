@@ -40,10 +40,10 @@ public class PKCS12Task extends DefaultTask {
 
     @TaskAction
     void generatePKCS12() {
-//        File filePkcs12File = getProject().file(pkcs12File);
-//        if(filePkcs12File.exists()) {
-//            filePkcs12File.delete();
-//        }
+        File filePkcs12File = getProject().file(pkcs12File);
+        if(filePkcs12File.exists()) {
+            filePkcs12File.delete();
+        }
         getProject().exec(execSpec -> {
             execSpec.setIgnoreExitValue(true);
             execSpec.workingDir(".");
