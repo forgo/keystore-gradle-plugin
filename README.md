@@ -17,7 +17,9 @@ Originally designed as a convenience, this plugin simplifies deploying developme
 ## Links
 
 - [Gradle Plugin Instructions](https://plugins.gradle.org/plugin/io.forgo.keystoreplugin)
-- [Java Spark Framework](https://github.com/forgo/sparkjava-demo)
+  - official gradle plugin page
+- [Java Spark Framework](https://github.com/forgo/sparkjava-demo) 
+  - demonstrates plugin's flexibility in running via IDE and generating Docker Images
 
 ## build.gradle usage
 ```
