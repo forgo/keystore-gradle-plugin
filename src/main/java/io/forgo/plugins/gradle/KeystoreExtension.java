@@ -6,6 +6,7 @@ public class KeystoreExtension {
 
     static final String EXTENSION_NAME = "keystore";
 
+    private static final String DEFAULT_OUTPUT_DIR = ".keystore";
     private static final String DEFAULT_KEY_FILE = "debug.key";
     private static final String DEFAULT_KEY_PASSWORD = "password";
     private static final String DEFAULT_CERT_FILE = "debug.crt";
@@ -15,6 +16,7 @@ public class KeystoreExtension {
     private static final String DEFAULT_JKS_PASSWORD = "password";
     private static final String DEFAULT_ALIAS = "debug";
 
+    String outputDir;
     String keyFile;
     String keyPassword;
     String certFile;
@@ -25,7 +27,22 @@ public class KeystoreExtension {
     String alias;
 
     public KeystoreExtension(Project project) {
+        // set defaults
+        this.outputDir = DEFAULT_OUTPUT_DIR;
+        this.keyFile = DEFAULT_KEY_FILE;
+        this.keyPassword = DEFAULT_KEY_PASSWORD;
+        this.certFile = DEFAULT_CERT_FILE;
+        this.pkcs12File = DEFAULT_PKCS12_FILE;
+        this.pkcs12Password = DEFAULT_PKCS12_PASSWORD;
+        this.jksFile = DEFAULT_JKS_FILE;
+        this.jksPassword = DEFAULT_JKS_PASSWORD;
+        this.alias = DEFAULT_ALIAS;
+    }
 
+    public String getOutputDir() {
+        return this.outputDir == null
+                ? DEFAULT_OUTPUT_DIR
+                : this.outputDir;
     }
 
     public String getKeyFile() {

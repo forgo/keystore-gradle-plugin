@@ -19,19 +19,30 @@ public class JKSTask extends DefaultTask {
         return "Keystore Gradle Plugin";
     }
 
+    private String outputDir;
     private String keyFile;
     private String certFile;
     private String pkcs12File;
     private String pkcs12Password;
-    private String keystoreFile;
-    private String keystorePassword;
+    private String jksFile;
+    private String jksPassword;
 
     @TaskAction
     void generateJKS() {
-        File fileKeystoreFile = getProject().file(keystoreFile);
-        if(fileKeystoreFile.exists()) {
-            fileKeystoreFile.delete();
+
+        // create output dir if it doesn't exist
+        File dir = getProject().mkdir(this.outputDir);
+        if(!dir.exists()) {
+            dir.mkdirs();
         }
+
+        // delete jks file if it exists in the output dir
+        String pathJksFile = this.outputDir + File.separatorChar + this.jksFile;
+        File file = getProject().file(pathJksFile);
+        if(file.exists()) {
+            file.delete();
+        }
+
         getProject().exec(execSpec -> {
             execSpec.setIgnoreExitValue(true);
             execSpec.workingDir(".");
@@ -39,28 +50,32 @@ public class JKSTask extends DefaultTask {
             List<String> args = Arrays.asList(
                     "-importkeystore",
                     "-srcstoretype", "PKCS12",
-                    "-srckeystore", pkcs12File,
-                    "-srcstorepass", pkcs12Password,
-                    "-destkeystore", keystoreFile,
-                    "-storepass", keystorePassword
+                    "-srckeystore", this.pkcs12File,
+                    "-srcstorepass", this.pkcs12Password,
+                    "-destkeystore", pathJksFile,
+                    "-storepass", this.jksPassword
             );
             execSpec.setArgs(args);
         });
 
-        File fileKeyFile = getProject().file(keyFile);
+        File fileKeyFile = getProject().file(this.keyFile);
         if(fileKeyFile.exists()) {
             fileKeyFile.delete();
         }
 
-        File fileCertFile = getProject().file(certFile);
+        File fileCertFile = getProject().file(this.certFile);
         if(fileCertFile.exists()) {
             fileCertFile.delete();
         }
 
-        File filePkcs12File = getProject().file(pkcs12File);
+        File filePkcs12File = getProject().file(this.pkcs12File);
         if(filePkcs12File.exists()) {
             filePkcs12File.delete();
         }
+    }
+
+    public void setOutputDir(String outputDir) {
+        this.outputDir = outputDir;
     }
 
     public void setKeyFile(String keyFile) {
@@ -79,11 +94,11 @@ public class JKSTask extends DefaultTask {
         this.pkcs12Password = pkcs12Password;
     }
 
-    public void setKeystoreFile(String keystoreFile) {
-        this.keystoreFile = keystoreFile;
+    public void setJksFile(String jksFile) {
+        this.jksFile = jksFile;
     }
 
-    public void setKeystorePassword(String keystorePassword) {
-        this.keystorePassword = keystorePassword;
+    public void setJksPassword(String jksPassword) {
+        this.jksPassword = jksPassword;
     }
 }

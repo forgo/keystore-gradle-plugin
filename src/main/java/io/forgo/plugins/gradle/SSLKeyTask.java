@@ -19,15 +19,27 @@ public class SSLKeyTask extends DefaultTask {
         return "Keystore Gradle Plugin";
     }
 
+    private String outputDir;
     private String keyFile;
     private String keyPassword;
 
     @TaskAction
     void generateKey() {
-        File fileKeyFile = getProject().file(this.keyFile);
-        if(fileKeyFile.exists()) {
-            fileKeyFile.delete();
+
+        // create output dir if it doesn't exist
+        File dir = getProject().mkdir(this.outputDir);
+        if(!dir.exists()) {
+            dir.mkdirs();
         }
+
+        // delete key file if it exists in the output dir
+        String pathKeyFile = this.outputDir + File.separatorChar + this.keyFile;
+        File file = getProject().file(pathKeyFile);
+        if(file.exists()) {
+            file.delete();
+        }
+
+        // execute openssl cmd to create private key
         getProject().exec(execSpec -> {
             execSpec.setIgnoreExitValue(true);
             execSpec.workingDir(".");
@@ -35,11 +47,15 @@ public class SSLKeyTask extends DefaultTask {
             List<String> args = Arrays.asList(
                     "genrsa",
                     "-des3",
-                    "-out", this.keyFile,
+                    "-out", pathKeyFile,
                     "-passout", "pass:"+this.keyPassword
             );
             execSpec.setArgs(args);
         });
+    }
+
+    public void setOutputDir(String outputDir) {
+        this.outputDir = outputDir;
     }
 
     public void setKeyFile(String keyFile) {

@@ -19,6 +19,7 @@ public class PKCS12Task extends DefaultTask {
         return "Keystore Gradle Plugin";
     }
 
+    private String outputDir;
     private String keyFile;
     private String keyPassword;
     private String certFile;
@@ -28,26 +29,41 @@ public class PKCS12Task extends DefaultTask {
 
     @TaskAction
     void generatePKCS12() {
-        File filePkcs12File = getProject().file(pkcs12File);
-        if(filePkcs12File.exists()) {
-            filePkcs12File.delete();
+
+        // create output dir if it doesn't exist
+        File dir = getProject().mkdir(this.outputDir);
+        if(!dir.exists()) {
+            dir.mkdirs();
         }
+
+        // delete pkcs12 file if it exists in the output dir
+        String pathPKCS12File = this.outputDir + File.separatorChar + this.pkcs12File;
+        File file = getProject().file(pathPKCS12File);
+        if(file.exists()) {
+            file.delete();
+        }
+
+        // execute openssl cmd to create pkcs12 keystore
         getProject().exec(execSpec -> {
             execSpec.setIgnoreExitValue(true);
             execSpec.workingDir(".");
             execSpec.setExecutable("openssl");
             List<String> args = Arrays.asList(
                     "pkcs12",
-                    "-inkey", keyFile,
-                    "-in", certFile,
+                    "-inkey", this.keyFile,
+                    "-in", this.certFile,
                     "-export",
-                    "-out", pkcs12File,
-                    "-passin", "pass:"+keyPassword,
-                    "-password", "pass:"+pkcs12Password,
-                    "-name", keystoreAlias
+                    "-out", pathPKCS12File,
+                    "-passin", "pass:"+this.keyPassword,
+                    "-password", "pass:"+this.pkcs12Password,
+                    "-name", this.keystoreAlias
             );
             execSpec.setArgs(args);
         });
+    }
+
+    public void setOutputDir(String outputDir) {
+        this.outputDir = outputDir;
     }
 
     public void setKeyFile(String keyFile) {

@@ -19,17 +19,28 @@ public class SSLCertTask extends DefaultTask {
         return "Keystore Gradle Plugin";
     }
 
+    private String outputDir;
     private String keyFile;
     private String keyPassword;
     private String certFile;
 
     @TaskAction
     void generateCert() {
-        File fileCertFile = getProject().file(certFile);
-        if(fileCertFile.exists()) {
-            fileCertFile.delete();
+
+        // create output dir if it doesn't exist
+        File dir = getProject().mkdir(this.outputDir);
+        if(!dir.exists()) {
+            dir.mkdirs();
         }
-        getProject().file(certFile).delete();
+
+        // delete cert file if it exists in the output dir
+        String pathCertFile = this.outputDir + File.separatorChar + this.certFile;
+        File file = getProject().file(pathCertFile);
+        if(file.exists()) {
+            file.delete();
+        }
+
+        // execute openssl cmd to create public cert
         getProject().exec(execSpec -> {
             execSpec.setIgnoreExitValue(true);
             execSpec.workingDir(".");
@@ -38,13 +49,17 @@ public class SSLCertTask extends DefaultTask {
                     "req",
                     "-new",
                     "-x509",
-                    "-key", keyFile,
-                    "-out", certFile,
-                    "-passin", "pass:"+keyPassword,
+                    "-key", this.keyFile,
+                    "-out", pathCertFile,
+                    "-passin", "pass:"+this.keyPassword,
                     "-subj", "/C=US"
             );
             execSpec.setArgs(args);
         });
+    }
+
+    public void setOutputDir(String outputDir) {
+        this.outputDir = outputDir;
     }
 
     public void setKeyFile(String keyFile) {

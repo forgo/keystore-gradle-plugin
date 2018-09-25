@@ -21,6 +21,7 @@ public class KeystorePlugin implements Plugin<Project> {
     private void addSSLKeyTask(Project project, KeystoreExtension extension) {
         project.getTasks().create(TASK_SSL_KEY, SSLKeyTask.class, task -> {
             project.afterEvaluate(p -> {
+                task.setOutputDir(extension.getOutputDir());
                 task.setKeyFile(extension.getKeyFile());
                 task.setKeyPassword(extension.getKeyPassword());
             });
@@ -30,6 +31,7 @@ public class KeystorePlugin implements Plugin<Project> {
     private void addSSLCertTask(Project project, KeystoreExtension extension) {
         project.getTasks().create(TASK_SSL_CERT, SSLCertTask.class, task -> {
             project.afterEvaluate(p -> {
+                task.setOutputDir(extension.getOutputDir());
                 task.setKeyFile(extension.getKeyFile());
                 task.setKeyPassword(extension.getKeyPassword());
                 task.setCertFile(extension.getCertFile());
@@ -41,6 +43,7 @@ public class KeystorePlugin implements Plugin<Project> {
     private void addPKCS12Task(Project project, KeystoreExtension extension) {
         project.getTasks().create(TASK_PKCS12, PKCS12Task.class, task -> {
             project.afterEvaluate(p -> {
+                task.setOutputDir(extension.getOutputDir());
                 task.setKeyFile(extension.getKeyFile());
                 task.setKeyPassword(extension.getKeyPassword());
                 task.setCertFile(extension.getCertFile());
@@ -55,12 +58,13 @@ public class KeystorePlugin implements Plugin<Project> {
     private void addJKSTask(Project project, KeystoreExtension extension) {
         project.getTasks().create(TASK_JKS, JKSTask.class, task -> {
             project.afterEvaluate(p -> {
+                task.setOutputDir(extension.getOutputDir());
                 task.setKeyFile(extension.getKeyFile());
                 task.setCertFile(extension.getCertFile());
                 task.setPkcs12File(extension.getPkcs12File());
                 task.setPkcs12Password(extension.getPkcs12Password());
-                task.setKeystoreFile(extension.getJksFile());
-                task.setKeystorePassword(extension.getJksPassword());
+                task.setJksFile(extension.getJksFile());
+                task.setJksPassword(extension.getJksPassword());
             });
             task.dependsOn(project.getTasks().getByName(TASK_PKCS12));
         });
