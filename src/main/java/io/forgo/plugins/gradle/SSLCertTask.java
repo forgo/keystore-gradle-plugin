@@ -41,6 +41,8 @@ public class SSLCertTask extends DefaultTask {
         }
 
         String pathKeyFile = this.outputDir + File.separatorChar + this.keyFile;
+        getLogger().info(">>>>>>pathKeyFile: " + pathKeyFile);
+        System.out.println(">>>>>>pathKeyFile: " + pathKeyFile);
 
         // execute openssl cmd to create public cert
         getProject().exec(execSpec -> {
