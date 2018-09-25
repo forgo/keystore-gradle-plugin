@@ -41,7 +41,7 @@ public class SSLCertTask extends DefaultTask {
         }
 
         String pathKeyFile = this.outputDir + File.separatorChar + this.keyFile;
-        pathKeyFile = ".keystore/" + this.keyFile;
+        String pathKeyFile2 = ".keystore/" + this.keyFile;
         getLogger().info(">>>>>>pathKeyFile: " + pathKeyFile);
         System.out.println(">>>>>>pathKeyFile: " + pathKeyFile);
 
@@ -54,7 +54,7 @@ public class SSLCertTask extends DefaultTask {
                     "req",
                     "-new",
                     "-x509",
-                    "-key", pathKeyFile,
+                    "-key", pathKeyFile2,
                     "-out", pathCertFile,
                     "-passin", "pass:"+this.keyPassword,
                     "-subj", "/C=US"
