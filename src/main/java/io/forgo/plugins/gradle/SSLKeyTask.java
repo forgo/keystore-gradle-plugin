@@ -30,12 +30,7 @@ public class SSLKeyTask extends DefaultTask {
     @TaskAction
     void generateKey() throws IOException {
 
-        // delete key file if it exists in the output dir
         String pathKeyFile = this.outputDir + File.separatorChar + this.keyFile;
-//        File file = getProject().file(pathKeyFile);
-//        if(file.exists()) {
-//            file.delete();
-//        }
 
         // execute openssl cmd to create private key
         getProject().exec(execSpec -> {

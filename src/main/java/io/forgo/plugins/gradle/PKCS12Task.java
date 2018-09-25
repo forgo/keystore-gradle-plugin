@@ -30,13 +30,7 @@ public class PKCS12Task extends DefaultTask {
     @TaskAction
     void generatePKCS12() {
 
-        // delete pkcs12 file if it exists in the output dir
         String pathPKCS12File = this.outputDir + File.separatorChar + this.pkcs12File;
-//        File file = getProject().file(pathPKCS12File);
-//        if(file.exists()) {
-//            file.delete();
-//        }
-
         String pathKeyFile = this.outputDir + File.separatorChar + this.keyFile;
         String pathCertFile = this.outputDir + File.separatorChar + this.certFile;
 

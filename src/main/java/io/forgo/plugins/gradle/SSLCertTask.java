@@ -27,13 +27,7 @@ public class SSLCertTask extends DefaultTask {
     @TaskAction
     void generateCert() {
 
-        // delete cert file if it exists in the output dir
         String pathCertFile = this.outputDir + File.separatorChar + this.certFile;
-//        File file = getProject().file(pathCertFile);
-//        if(file.exists()) {
-//            file.delete();
-//        }
-
         String pathKeyFile = this.outputDir + File.separatorChar + this.keyFile;
 
         // execute openssl cmd to create public cert

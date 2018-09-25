@@ -72,8 +72,6 @@ public class KeystorePlugin implements Plugin<Project> {
         project.getTasks().create(TASK_JKS, JKSTask.class, task -> {
             project.afterEvaluate(p -> {
                 task.setOutputDir(extension.getOutputDir());
-                task.setKeyFile(extension.getKeyFile());
-                task.setCertFile(extension.getCertFile());
                 task.setPkcs12File(extension.getPkcs12File());
                 task.setPkcs12Password(extension.getPkcs12Password());
                 task.setJksFile(extension.getJksFile());
