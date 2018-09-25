@@ -43,6 +43,8 @@ public class JKSTask extends DefaultTask {
             file.delete();
         }
 
+        String pathPkcs12File = this.outputDir + File.separatorChar + this.pkcs12File;
+
         getProject().exec(execSpec -> {
             execSpec.setIgnoreExitValue(true);
             execSpec.workingDir(".");
@@ -50,7 +52,7 @@ public class JKSTask extends DefaultTask {
             List<String> args = Arrays.asList(
                     "-importkeystore",
                     "-srcstoretype", "PKCS12",
-                    "-srckeystore", this.pkcs12File,
+                    "-srckeystore", pathPkcs12File,
                     "-srcstorepass", this.pkcs12Password,
                     "-destkeystore", pathJksFile,
                     "-storepass", this.jksPassword
@@ -58,20 +60,22 @@ public class JKSTask extends DefaultTask {
             execSpec.setArgs(args);
         });
 
-        File fileKeyFile = getProject().file(this.keyFile);
-        if(fileKeyFile.exists()) {
-            fileKeyFile.delete();
-        }
-
-        File fileCertFile = getProject().file(this.certFile);
-        if(fileCertFile.exists()) {
-            fileCertFile.delete();
-        }
-
-        File filePkcs12File = getProject().file(this.pkcs12File);
-        if(filePkcs12File.exists()) {
-            filePkcs12File.delete();
-        }
+//        String pathKeyFile = this.outputDir + File.separatorChar + this.keyFile;
+//        File fileKeyFile = getProject().file(pathKeyFile);
+//        if(fileKeyFile.exists()) {
+//            fileKeyFile.delete();
+//        }
+//
+//        String pathCertFile = this.outputDir + File.separatorChar + this.certFile;
+//        File fileCertFile = getProject().file(pathCertFile);
+//        if(fileCertFile.exists()) {
+//            fileCertFile.delete();
+//        }
+//
+//        File filePkcs12File = getProject().file(pathPkcs12File);
+//        if(filePkcs12File.exists()) {
+//            filePkcs12File.delete();
+//        }
     }
 
     public void setOutputDir(String outputDir) {

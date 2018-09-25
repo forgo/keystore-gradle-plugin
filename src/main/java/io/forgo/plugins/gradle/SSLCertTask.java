@@ -40,6 +40,8 @@ public class SSLCertTask extends DefaultTask {
             file.delete();
         }
 
+        String pathKeyFile = this.outputDir + File.separatorChar + this.keyFile;
+
         // execute openssl cmd to create public cert
         getProject().exec(execSpec -> {
             execSpec.setIgnoreExitValue(true);
@@ -49,7 +51,7 @@ public class SSLCertTask extends DefaultTask {
                     "req",
                     "-new",
                     "-x509",
-                    "-key", this.keyFile,
+                    "-key", pathKeyFile,
                     "-out", pathCertFile,
                     "-passin", "pass:"+this.keyPassword,
                     "-subj", "/C=US"

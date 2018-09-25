@@ -12,9 +12,9 @@ public class KeystorePlugin implements Plugin<Project> {
 
     public void apply(Project project) {
         KeystoreExtension extension = project.getExtensions().create(KeystoreExtension.EXTENSION_NAME, KeystoreExtension.class, project);
-        addSSLKeyTask(project, extension);
-        addSSLCertTask(project, extension);
-        addPKCS12Task(project, extension);
+//        addSSLKeyTask(project, extension);
+//        addSSLCertTask(project, extension);
+//        addPKCS12Task(project, extension);
         addJKSTask(project, extension);
     }
 

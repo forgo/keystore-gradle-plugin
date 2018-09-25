@@ -43,6 +43,9 @@ public class PKCS12Task extends DefaultTask {
             file.delete();
         }
 
+        String pathKeyFile = this.outputDir + File.separatorChar + this.keyFile;
+        String pathCertFile = this.outputDir + File.separatorChar + this.certFile;
+
         // execute openssl cmd to create pkcs12 keystore
         getProject().exec(execSpec -> {
             execSpec.setIgnoreExitValue(true);
@@ -50,8 +53,8 @@ public class PKCS12Task extends DefaultTask {
             execSpec.setExecutable("openssl");
             List<String> args = Arrays.asList(
                     "pkcs12",
-                    "-inkey", this.keyFile,
-                    "-in", this.certFile,
+                    "-inkey", pathKeyFile,
+                    "-in", pathCertFile,
                     "-export",
                     "-out", pathPKCS12File,
                     "-passin", "pass:"+this.keyPassword,
