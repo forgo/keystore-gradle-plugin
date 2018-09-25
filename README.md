@@ -6,6 +6,9 @@ Plugin to simplify creation of JKS keystores via a key, cert, and an intermediat
 ## build.gradle usage
 ```
 keystore {
+    // resetOutputDir task defaults
+    outputDir = ".keystore"
+
     // sslKey task defaults
     keyFile = "debug.key"
     keyPassword = "password"
