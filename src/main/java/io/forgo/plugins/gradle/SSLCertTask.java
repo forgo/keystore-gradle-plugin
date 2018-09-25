@@ -27,21 +27,14 @@ public class SSLCertTask extends DefaultTask {
     @TaskAction
     void generateCert() {
 
-        // create output dir if it doesn't exist
-        File dir = getProject().mkdir(this.outputDir);
-        if(!dir.exists()) {
-            dir.mkdirs();
-        }
-
         // delete cert file if it exists in the output dir
         String pathCertFile = this.outputDir + File.separatorChar + this.certFile;
-        File file = getProject().file(pathCertFile);
-        if(file.exists()) {
-            file.delete();
-        }
+//        File file = getProject().file(pathCertFile);
+//        if(file.exists()) {
+//            file.delete();
+//        }
 
         String pathKeyFile = this.outputDir + File.separatorChar + this.keyFile;
-        System.out.println(">>>>>>pathKeyFile: " + pathKeyFile);
 
         // execute openssl cmd to create public cert
         getProject().exec(execSpec -> {

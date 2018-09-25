@@ -30,18 +30,12 @@ public class JKSTask extends DefaultTask {
     @TaskAction
     void generateJKS() {
 
-        // create output dir if it doesn't exist
-        File dir = getProject().mkdir(this.outputDir);
-        if(!dir.exists()) {
-            dir.mkdirs();
-        }
-
         // delete jks file if it exists in the output dir
         String pathJksFile = this.outputDir + File.separatorChar + this.jksFile;
-        File file = getProject().file(pathJksFile);
-        if(file.exists()) {
-            file.delete();
-        }
+//        File file = getProject().file(pathJksFile);
+//        if(file.exists()) {
+//            file.delete();
+//        }
 
         String pathPkcs12File = this.outputDir + File.separatorChar + this.pkcs12File;
 

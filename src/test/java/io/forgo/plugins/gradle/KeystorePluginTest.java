@@ -8,30 +8,37 @@ import static org.junit.Assert.assertTrue;
 public class KeystorePluginTest {
 
     @Test
+    public void keystorePluginAddsResetOutputDirTaskToProject() {
+        Project project = ProjectBuilder.builder().build();
+        project.getPluginManager().apply(KeystorePlugin.PLUGIN_ID);
+        assertTrue(project.getTasks().getByName(KeystorePlugin.TASK_RESET_OUTPUT_DIR) instanceof ResetOutputDirTask);
+    }
+
+    @Test
     public void keystorePluginAddsSSLKeyTaskToProject() {
         Project project = ProjectBuilder.builder().build();
-        project.getPluginManager().apply("io.forgo.keystoreplugin");
-        assertTrue(project.getTasks().getByName("sslKey") instanceof SSLKeyTask);
+        project.getPluginManager().apply(KeystorePlugin.PLUGIN_ID);
+        assertTrue(project.getTasks().getByName(KeystorePlugin.TASK_SSL_KEY) instanceof SSLKeyTask);
     }
 
     @Test
     public void keystorePluginAddsSSLCertTaskToProject() {
         Project project = ProjectBuilder.builder().build();
-        project.getPluginManager().apply("io.forgo.keystoreplugin");
-        assertTrue(project.getTasks().getByName("sslCert") instanceof SSLCertTask);
+        project.getPluginManager().apply(KeystorePlugin.PLUGIN_ID);
+        assertTrue(project.getTasks().getByName(KeystorePlugin.TASK_SSL_CERT) instanceof SSLCertTask);
     }
 
     @Test
     public void keystorePluginAddsPKCS12TaskToProject() {
         Project project = ProjectBuilder.builder().build();
-        project.getPluginManager().apply("io.forgo.keystoreplugin");
-        assertTrue(project.getTasks().getByName("pkcs12") instanceof PKCS12Task);
+        project.getPluginManager().apply(KeystorePlugin.PLUGIN_ID);
+        assertTrue(project.getTasks().getByName(KeystorePlugin.TASK_PKCS12) instanceof PKCS12Task);
     }
 
     @Test
     public void keystorePluginAddsJKSTaskToProject() {
         Project project = ProjectBuilder.builder().build();
-        project.getPluginManager().apply("io.forgo.keystoreplugin");
-        assertTrue(project.getTasks().getByName("jks") instanceof JKSTask);
+        project.getPluginManager().apply(KeystorePlugin.PLUGIN_ID);
+        assertTrue(project.getTasks().getByName(KeystorePlugin.TASK_JKS) instanceof JKSTask);
     }
 }

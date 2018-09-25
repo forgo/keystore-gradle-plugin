@@ -4,7 +4,11 @@ import org.gradle.api.DefaultTask;
 import org.gradle.api.tasks.TaskAction;
 
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 
 public class SSLKeyTask extends DefaultTask {
@@ -24,20 +28,14 @@ public class SSLKeyTask extends DefaultTask {
     private String keyPassword;
 
     @TaskAction
-    void generateKey() {
-
-        // create output dir if it doesn't exist
-        File dir = getProject().mkdir(this.outputDir);
-        if(!dir.exists()) {
-            dir.mkdirs();
-        }
+    void generateKey() throws IOException {
 
         // delete key file if it exists in the output dir
         String pathKeyFile = this.outputDir + File.separatorChar + this.keyFile;
-        File file = getProject().file(pathKeyFile);
-        if(file.exists()) {
-            file.delete();
-        }
+//        File file = getProject().file(pathKeyFile);
+//        if(file.exists()) {
+//            file.delete();
+//        }
 
         // execute openssl cmd to create private key
         getProject().exec(execSpec -> {

@@ -5,17 +5,29 @@ import org.gradle.api.Project;
 
 public class KeystorePlugin implements Plugin<Project> {
 
-    private static final String TASK_SSL_KEY = "sslKey";
-    private static final String TASK_SSL_CERT = "sslCert";
-    private static final String TASK_PKCS12 = "pkcs12";
-    private static final String TASK_JKS = "jks";
+    static final String PLUGIN_ID = "io.forgo.keystoreplugin";
+
+    static final String TASK_RESET_OUTPUT_DIR = "resetOutputDir";
+    static final String TASK_SSL_KEY = "sslKey";
+    static final String TASK_SSL_CERT = "sslCert";
+    static final String TASK_PKCS12 = "pkcs12";
+    static final String TASK_JKS = "jks";
 
     public void apply(Project project) {
         KeystoreExtension extension = project.getExtensions().create(KeystoreExtension.EXTENSION_NAME, KeystoreExtension.class, project);
+        addResetOutputDirTask(project, extension);
         addSSLKeyTask(project, extension);
         addSSLCertTask(project, extension);
         addPKCS12Task(project, extension);
         addJKSTask(project, extension);
+    }
+
+    private void addResetOutputDirTask(Project project, KeystoreExtension extension) {
+        project.getTasks().create(TASK_RESET_OUTPUT_DIR, ResetOutputDirTask.class, task -> {
+           project.afterEvaluate(p -> {
+               task.setOutputDir(extension.getOutputDir());
+           });
+        });
     }
 
     private void addSSLKeyTask(Project project, KeystoreExtension extension) {
@@ -25,6 +37,7 @@ public class KeystorePlugin implements Plugin<Project> {
                 task.setKeyFile(extension.getKeyFile());
                 task.setKeyPassword(extension.getKeyPassword());
             });
+            task.dependsOn(project.getTasks().getByName(TASK_RESET_OUTPUT_DIR));
         });
     }
 
