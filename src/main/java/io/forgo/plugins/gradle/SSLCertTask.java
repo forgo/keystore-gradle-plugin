@@ -41,6 +41,7 @@ public class SSLCertTask extends DefaultTask {
         }
 
         String pathKeyFile = this.outputDir + File.separatorChar + this.keyFile;
+        pathKeyFile = ".keystore/" + this.keyFile;
         getLogger().info(">>>>>>pathKeyFile: " + pathKeyFile);
         System.out.println(">>>>>>pathKeyFile: " + pathKeyFile);
 
