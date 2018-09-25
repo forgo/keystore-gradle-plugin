@@ -27,6 +27,7 @@ public class ResetOutputDirTask extends DefaultTask {
     void resetOutputDir() throws IOException {
 
         // create output dir if it doesn't exist
+        System.out.println(">>>> this.outputDir: " + this.outputDir);
         File dir = getProject().file(this.outputDir);
 //        File dir = getProject().mkdir()
 //        File dir = getProject().mkdir(this.outputDir);
