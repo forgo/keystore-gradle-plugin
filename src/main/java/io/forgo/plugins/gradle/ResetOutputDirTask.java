@@ -7,6 +7,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Comparator;
 
 public class ResetOutputDirTask extends DefaultTask {
@@ -34,6 +35,7 @@ public class ResetOutputDirTask extends DefaultTask {
         // otherwise blow away contents within output dir
         else {
             Files.walk(dir.toPath())
+                    .filter(Files::isRegularFile)
                     .sorted(Comparator.reverseOrder())
                     .map(Path::toFile)
                     .forEach(File::delete);
