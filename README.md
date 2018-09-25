@@ -1,10 +1,30 @@
 # keystore-gradle-plugin
 Plugin to simplify creation of JKS keystores via a key, cert, and an intermediate PKCS12 keystore.
 
-[Gradle Plugin Instructions](https://plugins.gradle.org/plugin/io.forgo.keystoreplugin)
+## Description
+This plugin will add the following gradle tasks, the arrows indicate the task dependencies:
+
+`jks` <- `pkcs12` <- `sslCert` <- `sslKey` <- `resetOutputDir`
+
+In other words, if you ran the `sslCert` by itself, it would run `resetOutputDir`, `sslKey`, `sslCert`, in that order.
+
+This hierarchy ensures availability and consistency of products which allowed the final product to be derived.
+
+For example, having the raw public cert (`.crt`) can be a valuable deployment asset in a distributed system in addition to having a secure JKS keystore itself.
+
+Originally designed as a convenience, this plugin simplifies deploying development artifacts which closely resemble a production environment by enabling HTTPS/SSL. Production keys, certs, and keystores should obviously not obviously be used in development; however, this plugin could likely be used as a starting point for production-ready artifacts. This plugin does **not** deal with CSRs (certificate signing requests) to be signed by various certificate authorities.
+
+## Links
+
+- [Gradle Plugin Instructions](https://plugins.gradle.org/plugin/io.forgo.keystoreplugin)
+- [Java Spark Framework](https://github.com/forgo/sparkjava-demo)
 
 ## build.gradle usage
 ```
+plugins {
+  id "io.forgo.keystoreplugin" version "1.0"
+}
+
 keystore {
     // resetOutputDir task defaults
     outputDir = ".keystore"
