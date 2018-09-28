@@ -107,7 +107,7 @@ keytool -importkeystore \
 ```
 
 ### resetOutputDir
-Creates ${outputDir} if it doesn't exist; otherwise, deletes all regular files within ${outputDir}.
+Creates `${outputDir}` if it doesn't exist; otherwise, deletes all regular files within `${outputDir}`.
 
 ## How to verify keystore information
 ```
