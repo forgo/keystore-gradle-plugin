@@ -1,10 +1,11 @@
 # keystore-gradle-plugin
 Plugin to simplify creation of JKS keystores via a key, cert, and an intermediate PKCS12 keystore.
 
-## Links
-
-- [Gradle Plugin Instructions](https://plugins.gradle.org/plugin/io.forgo.keystoreplugin)
+- [Gradle Plugin](https://plugins.gradle.org/plugin/io.forgo.keystoreplugin)
   - official gradle plugin page
+  
+## Examples
+
 - [Java Spark Framework](https://github.com/forgo/sparkjava-demo) 
   - demonstrates plugin's flexibility in running via IDE and generating Docker images
   
