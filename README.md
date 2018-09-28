@@ -32,7 +32,9 @@ For example, having the raw public cert (`.crt`) can be a valuable deployment as
 
 If you are encrypting and version-controlling these artifacts manually, there is a risk of one being updated without the other or discovering that you need to regenerate these artifacts due to credentials changing. Not having a simple or documented workflow for generating these artifacts can lead to multiple stale copies being used in different contexts.
 
-Originally designed as a convenience, this plugin simplifies deploying development artifacts which closely resemble a production environment by enabling HTTPS/SSL. Production keys, certs, and keystores should obviously not be used in development; however, this plugin could likely be used as a starting point for production-ready artifacts. This plugin does **not** deal with CSRs (certificate signing requests) to be signed by various certificate authorities.
+Originally designed as a convenience, this plugin simplifies deploying development artifacts which closely resemble a production environment by enabling HTTPS/SSL.
+
+Production keys, certs, and keystores should obviously not be used in development; however, this plugin could likely be used as a starting point for production-ready artifacts. This plugin does **not** deal with CSRs (certificate signing requests) to be signed by various certificate authorities.
 
 ## Links
 
