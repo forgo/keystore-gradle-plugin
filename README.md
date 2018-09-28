@@ -6,13 +6,25 @@ This plugin will add the following gradle tasks, the arrows indicate the task de
 
 `jks` <- `pkcs12` <- `sslCert` <- `sslKey` <- `resetOutputDir`
 
-In other words, if you ran the `sslCert` task by itself, it would run `resetOutputDir`, `sslKey`, `sslCert`, in that order.
-
 This hierarchy ensures availability and consistency of products which allowed the final product to be derived.
 
-For example, having the raw public cert (`.crt`) can be a valuable deployment asset in a distributed system in addition to having a secure JKS keystore itself.
+For example, if you ran the `sslCert` task by itself, the following tasks would be run:
+1. `resetOutputDir`
+2. `sslKey`
+3. `sslCert`
+ 
+And the following products would be generated relative to your gradle build directory:
+- ${buildDir}/${outputDir = .keystore}/${keyFile = debug.key}
+- ${buildDir}/${outputDir = .keystore}/${keyFile = debug.crt}
+ 
+If desired, the default names of the output files can be overriden within the `keystore { ... }` extension.
 
-Originally designed as a convenience, this plugin simplifies deploying development artifacts which closely resemble a production environment by enabling HTTPS/SSL. Production keys, certs, and keystores should obviously not obviously be used in development; however, this plugin could likely be used as a starting point for production-ready artifacts. This plugin does **not** deal with CSRs (certificate signing requests) to be signed by various certificate authorities.
+The `pkcs12` and `jks` keystores would not be available in your output directory, in this case.
+
+# Why would I use this?
+Having the raw public cert (`.crt`) can be a valuable deployment asset in a distributed system in addition to having a secure JKS keystore itself.
+
+Originally designed as a convenience, this plugin simplifies deploying development artifacts which closely resemble a production environment by enabling HTTPS/SSL. Production keys, certs, and keystores should obviously not be used in development; however, this plugin could likely be used as a starting point for production-ready artifacts. This plugin does **not** deal with CSRs (certificate signing requests) to be signed by various certificate authorities.
 
 ## Links
 
