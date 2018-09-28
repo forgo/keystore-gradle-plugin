@@ -6,7 +6,7 @@ This plugin will add the following gradle tasks, the arrows indicate the task de
 
 `jks` <- `pkcs12` <- `sslCert` <- `sslKey` <- `resetOutputDir`
 
-In other words, if you ran the `sslCert` by itself, it would run `resetOutputDir`, `sslKey`, `sslCert`, in that order.
+In other words, if you ran the `sslCert` task by itself, it would run `resetOutputDir`, `sslKey`, `sslCert`, in that order.
 
 This hierarchy ensures availability and consistency of products which allowed the final product to be derived.
 
