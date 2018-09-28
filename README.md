@@ -17,7 +17,7 @@ And the following products would be generated relative to your gradle build dire
 - ${buildDir}/${outputDir = .keystore}/${keyFile = debug.key}
 - ${buildDir}/${outputDir = .keystore}/${keyFile = debug.crt}
  
-If desired, the default names of the output files can be overriden within the `keystore { ... }` extension.
+If desired, the `outputDir` and default names of the files can be overriden within the `keystore { ... }` extension. See [below](#build.gradle-example) for examples.
 
 The `pkcs12` and `jks` keystores would not be available in your output directory, in this case.
 
@@ -38,7 +38,7 @@ Originally designed as a convenience, this plugin simplifies deploying developme
 - [Java Spark Framework](https://github.com/forgo/sparkjava-demo) 
   - demonstrates plugin's flexibility in running via IDE and generating Docker images
 
-## build.gradle usage
+## build.gradle example
 ```
 plugins {
   id "io.forgo.keystoreplugin" version "1.0"
