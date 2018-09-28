@@ -16,10 +16,13 @@ For example, if you ran the `sslCert` task by itself, the following tasks would 
 And the following products would be generated relative to your gradle build directory:
 - ${buildDir}/${outputDir = .keystore}/${keyFile = debug.key}
 - ${buildDir}/${outputDir = .keystore}/${keyFile = debug.crt}
- 
-If desired, the `outputDir` and file names can be overriden with the `keystore { ... }` extension. See [buid.gradle example](#buildgradle).
 
 The `pkcs12` and `jks` keystores would not be available in your output directory, in this case.
+ 
+If desired, the `outputDir` and file names can be overriden with the `keystore { ... }` extension.
+
+See [buid.gradle example](#buildgradle).
+
 
 ## Why would I use this?
 
@@ -38,7 +41,7 @@ Originally designed as a convenience, this plugin simplifies deploying developme
 - [Java Spark Framework](https://github.com/forgo/sparkjava-demo) 
   - demonstrates plugin's flexibility in running via IDE and generating Docker images
 
-## build.gradle example
+## build.gradle
 ```
 plugins {
   id "io.forgo.keystoreplugin" version "1.0"
