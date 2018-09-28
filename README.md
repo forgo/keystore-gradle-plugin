@@ -21,7 +21,7 @@ If desired, the default names of the output files can be overriden within the `k
 
 The `pkcs12` and `jks` keystores would not be available in your output directory, in this case.
 
-# Why would I use this?
+## Why would I use this?
 Having the raw public cert (`.crt`) can be a valuable deployment asset in a distributed system in addition to having a secure JKS keystore itself.
 
 Originally designed as a convenience, this plugin simplifies deploying development artifacts which closely resemble a production environment by enabling HTTPS/SSL. Production keys, certs, and keystores should obviously not be used in development; however, this plugin could likely be used as a starting point for production-ready artifacts. This plugin does **not** deal with CSRs (certificate signing requests) to be signed by various certificate authorities.
