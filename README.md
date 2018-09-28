@@ -17,7 +17,7 @@ And the following products would be generated relative to your gradle build dire
 - ${buildDir}/${outputDir = .keystore}/${keyFile = debug.key}
 - ${buildDir}/${outputDir = .keystore}/${keyFile = debug.crt}
  
-If desired, the `outputDir` and default names of the files can be overriden within the `keystore { ... }` extension. See [below](#build.gradle-example) for examples.
+If desired, the `outputDir` and file names can be overriden with the `keystore { ... }` extension. See [buid.gradle example](#buildgradle).
 
 The `pkcs12` and `jks` keystores would not be available in your output directory, in this case.
 
