@@ -1,6 +1,13 @@
 # keystore-gradle-plugin
 Plugin to simplify creation of JKS keystores via a key, cert, and an intermediate PKCS12 keystore.
 
+## Links
+
+- [Gradle Plugin Instructions](https://plugins.gradle.org/plugin/io.forgo.keystoreplugin)
+  - official gradle plugin page
+- [Java Spark Framework](https://github.com/forgo/sparkjava-demo) 
+  - demonstrates plugin's flexibility in running via IDE and generating Docker images
+  
 ## Description
 This plugin will add the following gradle tasks, the arrows indicate the task dependencies:
 
@@ -35,13 +42,6 @@ If you are encrypting and version-controlling these artifacts manually, there is
 Originally designed as a convenience, this plugin simplifies deploying development artifacts which closely resemble a production environment by enabling HTTPS/SSL.
 
 Production keys, certs, and keystores should obviously not be used in development; however, this plugin could likely be used as a starting point for production-ready artifacts. This plugin does **not** deal with CSRs (certificate signing requests) to be signed by various certificate authorities.
-
-## Links
-
-- [Gradle Plugin Instructions](https://plugins.gradle.org/plugin/io.forgo.keystoreplugin)
-  - official gradle plugin page
-- [Java Spark Framework](https://github.com/forgo/sparkjava-demo) 
-  - demonstrates plugin's flexibility in running via IDE and generating Docker images
 
 ## build.gradle
 ```
