@@ -69,16 +69,42 @@ keystore {
 ## What the tasks do under the hood:
 
 ### sslKey
-`openssl genrsa -des3 -out ${pathKeyFile} -passout pass:${keyPassword}`
+```
+openssl genrsa -des3 \
+-out ${pathKeyFile} \
+-passout pass:${keyPassword}
+```
 
 ### sslCert
-`openssl req -new -x509 -key ${pathKeyFile} -out ${pathCertFile} -passin pass:${keyPassword} -subj /C=US`
+```
+openssl req -new -x509 \
+-key ${pathKeyFile} \
+-out ${pathCertFile} \
+-passin pass:${keyPassword} \
+-subj /C=US
+```
 
 ### pkcs12
-`openssl pkcs12 -inkey ${pathKeyFile} -in ${pathCertFile} -export -out ${pathPKCS12File} -passin pass:${keyPassword} -password pass:${pkcs12Password} -name ${keystoreAlias}`
+```
+openssl pkcs12 \
+-inkey ${pathKeyFile} \
+-in ${pathCertFile} \
+-export \
+-out ${pathPKCS12File} \
+-passin pass:${keyPassword} \
+-password pass:${pkcs12Password} \
+-name ${keystoreAlias}
+```
 
 ### jks
-`keytool -importkeystore -srcstoretype PKCS12 -srckeystore ${pathPkcs12File} -srcstorepass ${pkcs12Password} -destkeystore ${pathJksFile} -storepass ${jksPassword}`
+```
+keytool -importkeystore \
+-srcstoretype PKCS12 \
+-srckeystore ${pathPkcs12File} \
+-srcstorepass ${pkcs12Password} \
+-destkeystore ${pathJksFile} \
+-storepass ${jksPassword}
+```
 
 ### resetOutputDir
 Creates ${outputDir} if it doesn't exist; otherwise, deletes all regular files within ${outputDir}.
