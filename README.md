@@ -34,7 +34,7 @@ See [buid.gradle example](#buildgradle).
 
 ## Why would I use this?
 
-Maintaining private keys and public certs (and their derivative artifacts) in a consistent state can be an exercise in frustration and wasted time. This plugin is designed to help eliminate some natural second-guessing help create a consistent development workflow.
+Maintaining private keys and public certs (and their derivative artifacts) in a consistent state can be an exercise in frustration and wasted time. This plugin is designed to help eliminate some natural second-guessing and create a consistent development workflow.
 
 For example, having the raw public cert (`.crt`) can be a valuable deployment asset in a distributed system in addition to having a secure `.jks` keystore itself. 
 
