@@ -16,15 +16,15 @@ public class KeystoreExtension {
     private static final String DEFAULT_JKS_PASSWORD = "password";
     private static final String DEFAULT_ALIAS = "debug";
 
-    String outputDir;
-    String keyFile;
-    String keyPassword;
-    String certFile;
-    String pkcs12File;
-    String pkcs12Password;
-    String jksFile;
-    String jksPassword;
-    String alias;
+    private String outputDir;
+    private String keyFile;
+    private String keyPassword;
+    private String certFile;
+    private String pkcs12File;
+    private String pkcs12Password;
+    private String jksFile;
+    private String jksPassword;
+    private String alias;
 
     public KeystoreExtension(Project project) {
         // set defaults
@@ -39,6 +39,11 @@ public class KeystoreExtension {
         this.alias = DEFAULT_ALIAS;
     }
 
+    static private boolean isEmpty(String str) {
+        return str == null || str.trim().isEmpty();
+    }
+
+    // getters
     public String getOutputDir() {
         return this.outputDir == null
                 ? DEFAULT_OUTPUT_DIR
@@ -91,5 +96,60 @@ public class KeystoreExtension {
         return this.alias == null
                 ? DEFAULT_ALIAS
                 : this.alias;
+    }
+
+    // setters
+    public void setOutputDir(String outputDir) {
+        this.outputDir = isEmpty(outputDir)
+            ? DEFAULT_OUTPUT_DIR
+            : outputDir;
+    }
+
+    public void setKeyFile(String keyFile) {
+        this.keyFile = isEmpty(keyFile)
+            ? DEFAULT_KEY_FILE
+            : keyFile;
+    }
+
+    public void setKeyPassword(String keyPassword) {
+        this.keyPassword = isEmpty(keyPassword)
+            ? DEFAULT_KEY_PASSWORD
+            : keyPassword;
+    }
+
+    public void setCertFile(String certFile) {
+        this.certFile = isEmpty(certFile)
+            ? DEFAULT_CERT_FILE
+            : certFile;
+    }
+
+    public void setPkcs12File(String pkcs12File) {
+        this.pkcs12File = isEmpty(pkcs12File)
+            ? DEFAULT_PKCS12_FILE
+            : pkcs12File;
+    }
+
+    public void setPkcs12Password(String pkcs12Password) {
+        this.pkcs12Password = isEmpty(pkcs12Password)
+            ? DEFAULT_PKCS12_PASSWORD
+            : pkcs12Password;
+    }
+
+    public void setJksFile(String jksFile) {
+        this.jksFile = isEmpty(jksFile)
+            ? DEFAULT_JKS_FILE
+            : jksFile;
+    }
+
+    public void setJksPassword(String jksPassword) {
+        this.jksPassword = isEmpty(alias)
+            ? DEFAULT_JKS_PASSWORD
+            : jksPassword;
+    }
+
+    public void setAlias(String alias) {
+        this.alias = isEmpty(alias)
+            ? DEFAULT_ALIAS
+            : alias;
     }
 }
